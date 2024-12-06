@@ -20,7 +20,7 @@ public class SettingsWindow : Window
     private readonly PenumbraService _penumbraService;
     private readonly GlamourerService _glamourerService;
     private readonly WebService _webService;
-    private readonly BrioIPCService _brioIPCService;
+    //private readonly BrioIPCService _brioIPCService;
     private readonly MareService _mareService;
 
     public SettingsWindow(
@@ -28,7 +28,6 @@ public class SettingsWindow : Window
         PenumbraService penumbraService,
         GlamourerService glamourerService,
         WebService webService,
-        BrioIPCService brioIPCService,
         MareService mareService) : base($"{Brio.Name} Settings###brio_settings_window", ImGuiWindowFlags.NoResize)
     {
         Namespace = "brio_settings_namespace";
@@ -37,7 +36,6 @@ public class SettingsWindow : Window
         _penumbraService = penumbraService;
         _glamourerService = glamourerService;
         _webService = webService;
-        _brioIPCService = brioIPCService;
         _mareService = mareService;
 
         Size = new Vector2(400, 450);
@@ -271,7 +269,7 @@ public class SettingsWindow : Window
                 _configurationService.Configuration.IPC.EnableBrioIPC = enableBrioIpc;
                 _configurationService.ApplyChange();
             }
-            ImGui.Text($"Brio IPC Status: {(_brioIPCService.IsIPCEnabled ? "Active" : "Inactive")}");
+            //ImGui.Text($"Brio IPC Status: {(_brioIPCService.IsIPCEnabled ? "Active" : "Inactive")}");
 
             bool enableWebApi = _configurationService.Configuration.IPC.AllowWebAPI;
             if(ImGui.Checkbox("Enable Web API", ref enableWebApi))

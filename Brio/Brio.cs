@@ -122,7 +122,7 @@ public class Brio
         serviceCollection.AddSingleton<InputService>();
 
         // IPC
-        serviceCollection.AddSingleton<BrioIPCService>();
+        //serviceCollection.AddSingleton<BrioIPCService>();
         serviceCollection.AddSingleton<PenumbraService>();
         serviceCollection.AddSingleton<GlamourerService>();
         serviceCollection.AddSingleton<MareService>();
