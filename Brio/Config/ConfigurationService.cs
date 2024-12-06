@@ -1,4 +1,4 @@
-﻿using Dalamud.Plugin;
+using Dalamud.Plugin;
 using System;
 
 namespace Brio.Config;
@@ -23,13 +23,13 @@ public class ConfigurationService : IDisposable
 
     public void Save()
     {
-        _pluginInterface.SavePluginConfig(Configuration);
+        //_pluginInterface.SavePluginConfig(Configuration);
     }
 
     public void ApplyChange(bool save = true)
     {
-        if(save)
-            Save();
+        ////if(save)
+        ////    Save();
 
         OnConfigurationChanged?.Invoke();
     }
@@ -43,7 +43,7 @@ public class ConfigurationService : IDisposable
 
     public void Dispose()
     {
-        Save();
+        //Save();
     }
 
 #if DEBUG
