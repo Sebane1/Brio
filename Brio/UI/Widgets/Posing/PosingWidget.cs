@@ -11,7 +11,7 @@ using System.Numerics;
 
 namespace Brio.UI.Widgets.Posing;
 
-internal class PosingWidget(PosingCapability capability) : Widget<PosingCapability>(capability)
+public class PosingWidget(PosingCapability capability) : Widget<PosingCapability>(capability)
 {
     public override string HeaderName => "Posing";
 

@@ -12,7 +12,7 @@ public class StatusEffectSelectorHolder
     public Status Status { get; set; }
 }
 
-internal class StatusEffectSelector(string id) : Selector<StatusEffectSelectorHolder>(id)
+public class StatusEffectSelector(string id) : Selector<StatusEffectSelectorHolder>(id)
 {
     protected override Vector2 MinimumListSize { get; } = new(300, 300);
 

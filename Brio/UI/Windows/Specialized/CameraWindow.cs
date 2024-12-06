@@ -9,7 +9,7 @@ using System;
 
 namespace Brio.UI.Windows.Specialized;
 
-internal class CameraWindow : Window, IDisposable
+public class CameraWindow : Window, IDisposable
 {
     private readonly EntityManager _entityManager;
     private readonly GPoseService _gPoseService;

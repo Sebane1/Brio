@@ -6,7 +6,7 @@ using System;
 
 namespace Brio.Entities.Camera;
 
-internal class CameraEntity : Entity
+public class CameraEntity : Entity
 {
     public override string FriendlyName => "Camera";
 

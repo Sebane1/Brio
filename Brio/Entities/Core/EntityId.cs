@@ -5,7 +5,7 @@ using NativeGameObject = FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject;
 
 namespace Brio.Entities.Core;
 
-internal record struct EntityId(string Unique)
+public record struct EntityId(string Unique)
 {
     public EntityId(IGameObject go) : this($"actor_{go.Address}")
     {

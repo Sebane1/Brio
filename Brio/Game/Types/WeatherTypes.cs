@@ -6,7 +6,7 @@ using OneOf.Types;
 namespace Brio.Game.Types;
 
 [GenerateOneOf]
-internal partial class WeatherUnion : OneOfBase<Weather, None>
+public partial class WeatherUnion : OneOfBase<Weather, None>
 {
     public static implicit operator WeatherUnion(WeatherId weatherId)
     {
@@ -17,7 +17,7 @@ internal partial class WeatherUnion : OneOfBase<Weather, None>
     }
 }
 
-internal record struct WeatherId(byte Id)
+public record struct WeatherId(byte Id)
 {
     public static WeatherId None { get; } = new(0);
 

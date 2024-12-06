@@ -12,7 +12,7 @@ using System.Numerics;
 
 namespace Brio.UI.Controls.Editors;
 
-internal class GearEditor()
+public class GearEditor()
 {
     private Vector2 IconSize => new(ImGui.GetTextLineHeight() * 3.9f);
 

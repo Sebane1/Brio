@@ -1,6 +1,6 @@
 ﻿namespace Brio.Config;
 
-internal class IPCConfiguration
+public class IPCConfiguration
 {
     public bool EnableBrioIPC { get; set; } = true;
     public bool AllowPenumbraIntegration { get; set; } = true;

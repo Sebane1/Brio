@@ -1,4 +1,4 @@
-﻿using Brio.Game.Actor.Interop;
+using Brio.Game.Actor.Interop;
 using Dalamud.Game;
 using Dalamud.Hooking;
 using Dalamud.Plugin.Services;
@@ -9,7 +9,7 @@ using NativeCharacter = FFXIVClientStructs.FFXIV.Client.Game.Character.Character
 
 namespace Brio.Game.Core;
 
-internal unsafe class ObjectMonitorService : IDisposable
+public unsafe class ObjectMonitorService : IDisposable
 {
     public IObjectTable ObjectTable => _objectTable;
 

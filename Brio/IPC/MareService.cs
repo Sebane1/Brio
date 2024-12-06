@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Brio.IPC;
 
-internal class MareService : IDisposable
+public class MareService : IDisposable
 {
     public bool IsMareAvailable { get; private set; } = false;
 

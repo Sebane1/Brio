@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Brio.IPC;
 
-internal class GlamourerService : IDisposable
+public class GlamourerService : IDisposable
 {
     public bool IsGlamourerAvailable { get; private set; } = false;
 

@@ -10,7 +10,7 @@ using System.Numerics;
 
 namespace Brio.UI.Controls.Editors;
 
-internal static class AppearanceEditorCommon
+public static class AppearanceEditorCommon
 {
     private const string _collectionLabel = "Collection";
     private static float _lableWidth { get; } = ImGui.CalcTextSize($"{_collectionLabel} XXXXXXXXX").X;

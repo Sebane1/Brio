@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Brio.Config;
 
-internal class InputConfiguration
+public class InputConfiguration
 {
     public Dictionary<KeyBindEvents, KeyBind> Bindings { get; set; } = new()
     {

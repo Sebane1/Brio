@@ -10,7 +10,7 @@ using System.Text;
 
 namespace Brio.UI.Windows;
 
-internal class UpdateWindow : Window
+public class UpdateWindow : Window
 {
     private readonly List<string> _changelogTest = [];
     private const float _closeButtonWidth = 210f;

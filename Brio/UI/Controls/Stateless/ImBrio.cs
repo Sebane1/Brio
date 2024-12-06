@@ -8,7 +8,7 @@ using ImGuiNET;
 using System.Numerics;
 
 namespace Brio.UI.Controls.Stateless;
-internal static partial class ImBrio
+public static partial class ImBrio
 {
     public static void FontIcon(FontAwesomeIcon icon)
     {

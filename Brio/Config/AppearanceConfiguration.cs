@@ -1,6 +1,6 @@
 ﻿namespace Brio.Config;
 
-internal class AppearanceConfiguration
+public class AppearanceConfiguration
 {
     public ApplyNPCHack ApplyNPCHack { get; set; } = ApplyNPCHack.InGPose;
 

@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Actor;
+using Brio.Capabilities.Actor;
 using Brio.Entities.Actor;
 using Brio.UI.Controls.Stateless;
 using Brio.UI.Widgets.Core;
@@ -9,7 +9,7 @@ using System.Numerics;
 
 namespace Brio.UI.Widgets.Actor;
 
-internal class ActorContainerWidget(ActorContainerCapability capability) : Widget<ActorContainerCapability>(capability)
+public class ActorContainerWidget(ActorContainerCapability capability) : Widget<ActorContainerCapability>(capability)
 {
     public override string HeaderName => "Actors";
     public override WidgetFlags Flags

@@ -1,6 +1,6 @@
 ﻿
 namespace Brio.UI.Controls.Core;
-internal static class UIConstants
+public static class UIConstants
 {
     public const uint ToggleButtonInactive = 0xFFFFFFFF;
     public const uint ToggleButtonActive = 0xFF0050FF;

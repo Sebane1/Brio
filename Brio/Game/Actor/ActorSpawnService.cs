@@ -1,4 +1,4 @@
-﻿using Brio.Core;
+using Brio.Core;
 using Brio.Game.Actor.Extensions;
 using Brio.Game.Core;
 using Brio.Game.GPose;
@@ -10,13 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Numerics;
 using CharacterCopyFlags = FFXIVClientStructs.FFXIV.Client.Game.Character.CharacterSetupContainer.CopyFlags;
 using ClientObjectManager = FFXIVClientStructs.FFXIV.Client.Game.Object.ClientObjectManager;
 using NativeCharacter = FFXIVClientStructs.FFXIV.Client.Game.Character.Character;
 
 namespace Brio.Game.Actor;
 
-internal class ActorSpawnService : IDisposable
+public class ActorSpawnService : IDisposable
 {
     private readonly ObjectMonitorService _monitorService;
     private readonly IObjectTable _objectTable;
@@ -45,14 +46,14 @@ internal class ActorSpawnService : IDisposable
         _clientState.TerritoryChanged += OnTerritoryChanged;
     }
 
-    public bool CreateCharacter([MaybeNullWhen(false)] out ICharacter outCharacter, SpawnFlags flags = SpawnFlags.Default, bool disableSpawnCompanion = false)
+    public bool CreateCharacter([MaybeNullWhen(false)] out ICharacter outCharacter, SpawnFlags flags = SpawnFlags.Default, bool disableSpawnCompanion = false, Vector3 position = new Vector3(), float rotation = 0)
     {
         outCharacter = null;
 
         var localPlayer = _clientState.LocalPlayer;
         if(localPlayer != null)
         {
-            if(CloneCharacter(localPlayer, out outCharacter, flags, disableSpawnCompanion: disableSpawnCompanion))
+            if(CloneCharacter(localPlayer, out outCharacter, flags, disableSpawnCompanion: disableSpawnCompanion, position, rotation))
             {
                 return true;
             }
@@ -61,7 +62,7 @@ internal class ActorSpawnService : IDisposable
         return false;
     }
 
-    public unsafe bool CloneCharacter(ICharacter sourceCharacter, [MaybeNullWhen(false)] out ICharacter outCharacter, SpawnFlags flags = SpawnFlags.Default, bool disableSpawnCompanion = false)
+    public unsafe bool CloneCharacter(ICharacter sourceCharacter, [MaybeNullWhen(false)] out ICharacter outCharacter, SpawnFlags flags = SpawnFlags.Default, bool disableSpawnCompanion = false, Vector3 position = new Vector3(), float rotation = 0)
     {
         outCharacter = null;
 
@@ -92,14 +93,28 @@ internal class ActorSpawnService : IDisposable
             // Copy position if requested
             if(flags.HasFlag(SpawnFlags.CopyPosition))
             {
-                var position = sourceNative->GameObject.Position;
-                var rotation = sourceNative->GameObject.Rotation;
+                position = sourceNative->GameObject.Position;
+                rotation = sourceNative->GameObject.Rotation;
 
                 // TODO: This is only needed for Anamnesis and Ktisis. 
                 if(sourceNative->GameObject.DrawObject != null && sourceNative->GameObject.DrawObject->IsVisible)
                 {
                     // TODO: This is weird if you are mounted
-                    position = sourceNative->GameObject.DrawObject->Object.Position;
+                    //position = sourceNative->GameObject.DrawObject->Object.Position;
+                }
+
+                targetNative->GameObject.DefaultPosition = position;
+                targetNative->GameObject.Position = position;
+                targetNative->GameObject.Rotation = rotation;
+                targetNative->GameObject.DefaultRotation = rotation;
+            }
+            if(flags.HasFlag(SpawnFlags.DefinePosition))
+            {
+                // TODO: This is only needed for Anamnesis and Ktisis. 
+                if(sourceNative->GameObject.DrawObject != null && sourceNative->GameObject.DrawObject->IsVisible)
+                {
+                    // TODO: This is weird if you are mounted
+                    // position = sourceNative->GameObject.DrawObject->Object.Position;
                 }
 
                 targetNative->GameObject.DefaultPosition = position;
@@ -181,14 +196,14 @@ internal class ActorSpawnService : IDisposable
     {
         if(character.CalculateCompanionInfo(out var info))
         {
-            InternalSetCompanion(character, info.Kind, 0);
+            publicSetCompanion(character, info.Kind, 0);
         }
     }
 
     public unsafe void CreateCompanion(ICharacter character, CompanionContainer container)
     {
         DestroyCompanion(character);
-        InternalSetCompanion(character, container.Kind, (short)container.Id);
+        publicSetCompanion(character, container.Kind, (short)container.Id);
 
         // We need to wait for the companion to be ready before we can draw it.
         var companionNative = &character.Native()->CompanionObject->Character.GameObject;
@@ -200,7 +215,7 @@ internal class ActorSpawnService : IDisposable
         );
     }
 
-    private unsafe void InternalSetCompanion(ICharacter character, CompanionKind kind, short id)
+    private unsafe void publicSetCompanion(ICharacter character, CompanionKind kind, short id)
     {
         var native = character.Native();
         switch(kind)
@@ -295,11 +310,12 @@ internal class ActorSpawnService : IDisposable
 }
 
 [Flags]
-enum SpawnFlags
+public enum SpawnFlags
 {
     None = 0,
     ReserveCompanionSlot = 1 << 0,
     CopyPosition = 1 << 1,
+    DefinePosition = 1 << 2,
 
-    Default = CopyPosition,
+    Default = None,
 }

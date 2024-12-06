@@ -17,7 +17,7 @@ using System.Linq;
 
 namespace Brio.Capabilities.Posing;
 
-internal class PosingCapability : ActorCharacterCapability
+public class PosingCapability : ActorCharacterCapability
 {
     public PosingSelectionType Selected { get; set; } = new None();
     public PosingSelectionType Hover { get; set; } = new None();
@@ -267,7 +267,7 @@ internal class PosingCapability : ActorCharacterCapability
         return poseFile;
     }
 
-    internal record struct PoseStack(PoseInfo Info, Transform ModelTransform);
+    public record struct PoseStack(PoseInfo Info, Transform ModelTransform);
 }
 
 public enum ExpressionPhase

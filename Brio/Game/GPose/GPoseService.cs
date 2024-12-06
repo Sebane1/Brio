@@ -1,4 +1,4 @@
-﻿using Brio.Config;
+using Brio.Config;
 using Dalamud.Game;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Hooking;
@@ -11,9 +11,9 @@ using NativeCharacter = FFXIVClientStructs.FFXIV.Client.Game.Character.Character
 
 namespace Brio.Game.GPose;
 
-internal unsafe class GPoseService : IDisposable
+public unsafe class GPoseService : IDisposable
 {
-    public bool IsGPosing => _isInFakeGPose || _isInGPose;
+    public bool IsGPosing => true;
 
     public delegate void OnGPoseStateDelegate(bool newState);
     public event OnGPoseStateDelegate? OnGPoseStateChange;
@@ -33,7 +33,7 @@ internal unsafe class GPoseService : IDisposable
     }
 
     private bool _isInGPose = false;
-    private bool _isInFakeGPose = false;
+    private bool _isInFakeGPose = true;
 
     private delegate bool GPoseEnterExitDelegate(UIModule* uiModule);
     private delegate void ExitGPoseDelegate(UIModule* uiModule);
@@ -127,10 +127,10 @@ internal unsafe class GPoseService : IDisposable
 
     private void HandleGPoseStateChange(bool newState)
     {
-        if(IsGPosing == newState || _isInFakeGPose)
-            return;
+        //if(IsGPosing == newState || _isInFakeGPose)
+        //    return;
 
-        _isInGPose = newState;
+        _isInGPose = true;
 
         UpdateDynamicHooks();
 

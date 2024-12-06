@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Actor;
+using Brio.Capabilities.Actor;
 using Brio.Config;
 using Brio.Entities;
 using Brio.Entities.Core;
@@ -23,7 +23,7 @@ using static Brio.Game.Actor.ActionTimelineService;
 
 namespace Brio.UI.Controls.Editors;
 
-internal class ActionTimelineEditor(CutsceneManager cutsceneManager, GPoseService gPoseService, EntityManager entityManager, PhysicsService physicsService, ConfigurationService configService)
+public class ActionTimelineEditor(CutsceneManager cutsceneManager, GPoseService gPoseService, EntityManager entityManager, PhysicsService physicsService, ConfigurationService configService)
 {
     private readonly CutsceneManager _cutsceneManager = cutsceneManager;
     private readonly GPoseService _gPoseService = gPoseService;

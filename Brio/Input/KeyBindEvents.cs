@@ -1,6 +1,6 @@
 ﻿namespace Brio.Input;
 
-internal enum KeyBindEvents
+public enum KeyBindEvents
 {
     Interface_ToggleBrioWindow,
     Interface_ToggleBindPromptWindow,

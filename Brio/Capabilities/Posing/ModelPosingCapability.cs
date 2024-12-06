@@ -6,7 +6,7 @@ using Brio.Game.Posing;
 
 namespace Brio.Capabilities.Posing;
 
-internal class ModelPosingCapability : ActorCharacterCapability
+public class ModelPosingCapability : ActorCharacterCapability
 {
     public bool HasOverride => _transformOverride.HasValue;
 

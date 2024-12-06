@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Core;
+using Brio.Capabilities.Core;
 using Brio.Entities;
 using Brio.Entities.Actor;
 using Brio.Game.Actor;
@@ -9,7 +9,7 @@ using Dalamud.Game.ClientState.Objects.Types;
 
 namespace Brio.Capabilities.Actor;
 
-internal class ActorContainerCapability : Capability
+public class ActorContainerCapability : Capability
 {
     private readonly EntityManager _entityManager;
     private readonly ActorSpawnService _actorSpawnService;

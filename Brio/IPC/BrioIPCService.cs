@@ -8,7 +8,7 @@ using System;
 using System.Threading.Tasks;
 
 namespace Brio.IPC;
-internal class BrioIPCService : IDisposable
+public class BrioIPCService : IDisposable
 {
     public bool IsIPCEnabled { get; private set; } = false;
 

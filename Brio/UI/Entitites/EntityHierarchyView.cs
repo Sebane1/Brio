@@ -9,7 +9,7 @@ using System.Numerics;
 
 namespace Brio.UI.Entitites;
 
-internal class EntityHierarchyView(EntityManager entityManager)
+public class EntityHierarchyView(EntityManager entityManager)
 {
     private readonly float buttonWidth = ImGui.GetTextLineHeight() * 14f;
     private readonly float offsetWidth = 16f;

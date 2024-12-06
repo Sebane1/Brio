@@ -8,7 +8,7 @@ using Dalamud.Game.ClientState.Objects.Types;
 
 namespace Brio.Capabilities.Actor;
 
-internal class ActorLifetimeCapability : ActorCapability
+public class ActorLifetimeCapability : ActorCapability
 {
     private readonly TargetService _targetService;
 

@@ -1,4 +1,4 @@
-﻿using Brio.Config;
+using Brio.Config;
 using Brio.Core;
 using Brio.Entities;
 using Brio.Files;
@@ -27,11 +27,11 @@ using System.Diagnostics;
 
 namespace Brio;
 
-public class Brio : IDalamudPlugin
+public class Brio
 {
     public const string Name = "Brio";
 
-    private static ServiceProvider? _services = null;
+    public static ServiceProvider? _services = null;
 
     public static IPluginLog Log { get; private set; } = null!;
     public static IFramework Framework { get; private set; } = null!;
@@ -61,8 +61,15 @@ public class Brio : IDalamudPlugin
                 {
                     if(service.Lifetime == ServiceLifetime.Singleton)
                     {
-                        Log.Debug($"Initializing {service.ServiceType}...");
-                        _services.GetRequiredService(service.ServiceType);
+                        try
+                        {
+                            Log.Debug($"Initializing {service.ServiceType}...");
+                            _services.GetRequiredService(service.ServiceType);
+                        }
+                        catch
+                        {
+
+                        }
                     }
                 }
 

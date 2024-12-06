@@ -3,7 +3,7 @@ using ImGuizmoNET;
 
 namespace Brio.Game.Posing;
 
-internal class PosingService
+public class PosingService
 {
     public PosingOperation Operation { get; set; } = PosingOperation.Rotate;
 
@@ -40,13 +40,13 @@ internal class PosingService
     }
 }
 
-internal enum PosingCoordinateMode
+public enum PosingCoordinateMode
 {
     Local,
     World
 }
 
-internal enum PosingOperation
+public enum PosingOperation
 {
     Translate,
     Rotate,
@@ -54,7 +54,7 @@ internal enum PosingOperation
     Universal
 }
 
-internal static class PosingExtensions
+public static class PosingExtensions
 {
     public static MODE AsGizmoMode(this PosingCoordinateMode mode) => mode switch
     {

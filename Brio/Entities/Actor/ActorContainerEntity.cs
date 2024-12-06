@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Actor;
+using Brio.Capabilities.Actor;
 using Brio.Entities.Core;
 using Dalamud.Interface;
 using Microsoft.Extensions.DependencyInjection;
@@ -6,7 +6,7 @@ using System;
 
 namespace Brio.Entities.Actor;
 
-internal class ActorContainerEntity(IServiceProvider provider) : Entity("actorContainer", provider)
+public class ActorContainerEntity(IServiceProvider provider) : Entity("actorContainer", provider)
 {
     public override string FriendlyName => "Actors";
     public override FontAwesomeIcon Icon => FontAwesomeIcon.Users;

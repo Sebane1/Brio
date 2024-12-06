@@ -4,7 +4,7 @@ using Brio.UI.Widgets.Core;
 
 namespace Brio.UI.Widgets.Camera;
 
-internal class CameraWidget : Widget<CameraCapability>
+public class CameraWidget : Widget<CameraCapability>
 {
     public override string HeaderName => "Camera";
 

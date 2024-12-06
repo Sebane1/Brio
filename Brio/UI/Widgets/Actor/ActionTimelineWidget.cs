@@ -7,7 +7,7 @@ using Brio.UI.Widgets.Core;
 
 namespace Brio.UI.Widgets.Actor;
 
-internal class ActionTimelineWidget(ActionTimelineCapability capability, EntityManager entityManager, PhysicsService physicsService, ConfigurationService configService) : Widget<ActionTimelineCapability>(capability)
+public class ActionTimelineWidget(ActionTimelineCapability capability, EntityManager entityManager, PhysicsService physicsService, ConfigurationService configService) : Widget<ActionTimelineCapability>(capability)
 {
     public override string HeaderName => "Animation Control";
 

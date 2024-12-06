@@ -20,7 +20,7 @@ using System.Numerics;
 
 namespace Brio.UI.Windows.Specialized;
 
-internal class PosingOverlayWindow : Window, IDisposable
+public class PosingOverlayWindow : Window, IDisposable
 {
 
     private readonly EntityManager _entityManager;
@@ -497,7 +497,7 @@ internal class PosingOverlayWindow : Window, IDisposable
         public bool GizmoEnabled => !PopupOpen && !AnyClickableClicked && !AnyClickableHovered && !UserDisablingGizmo;
     }
 
-    internal class ClickableItem
+    public class ClickableItem
     {
         public PosingSelectionType Item = null!;
 

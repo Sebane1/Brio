@@ -16,7 +16,7 @@ using static Brio.Game.Actor.ActionTimelineService;
 
 namespace Brio.Capabilities.Actor;
 
-internal class ActionTimelineCapability : ActorCharacterCapability
+public class ActionTimelineCapability : ActorCharacterCapability
 {
     public unsafe float SpeedMultiplier => SpeedMultiplierOverride ?? Character.Native()->Timeline.OverallSpeed;
     public bool HasSpeedMultiplierOverride => SpeedMultiplierOverride.HasValue;

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Brio.Input;
 
-internal class InputService
+public class InputService
 {
     private readonly IKeyState _keyState;
     private readonly IFramework _framework;

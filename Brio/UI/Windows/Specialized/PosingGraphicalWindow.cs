@@ -23,7 +23,7 @@ using System.Numerics;
 
 namespace Brio.UI.Windows.Specialized;
 
-internal class PosingGraphicalWindow : Window, IDisposable
+public class PosingGraphicalWindow : Window, IDisposable
 {
     private const float RightPanelWidth = 250;
 

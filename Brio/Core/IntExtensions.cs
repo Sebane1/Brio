@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Brio.Core;
 
-internal static class IntExtensions
+public static class IntExtensions
 {
     public static string ToWords(this int number, string separator = " ")
     {

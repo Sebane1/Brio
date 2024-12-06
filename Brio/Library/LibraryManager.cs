@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace Brio.Library;
 
-internal class LibraryManager : IDisposable
+public class LibraryManager : IDisposable
 {
     private static LibraryManager? _instance;
 
@@ -25,7 +25,7 @@ internal class LibraryManager : IDisposable
     private readonly IFramework _framework;
     private readonly LibraryRoot _rootItem;
     private readonly List<SourceBase> _sources = new();
-    private readonly IEnumerable<SourceBase> _internalSources;
+    private readonly IEnumerable<SourceBase> _publicSources;
 
     private LibraryWindow? _window;
 
@@ -39,14 +39,14 @@ internal class LibraryManager : IDisposable
         FileService fileService,
         ConfigurationService configurationService,
         IFramework framework,
-        IEnumerable<SourceBase> internalSources)
+        IEnumerable<SourceBase> publicSources)
     {
         _instance = this;
         _fileService = fileService;
         _configurationService = configurationService;
         _framework = framework;
         _rootItem = new();
-        _internalSources = internalSources;
+        _publicSources = publicSources;
 
         _configurationService.Configuration.Library.ReEstablishDefaultPaths();
         _configurationService.OnConfigurationChanged += OnConfigurationChanged;
@@ -218,7 +218,7 @@ internal class LibraryManager : IDisposable
     {
         Tag.ClearTagCache();
 
-        foreach(SourceBase source in _internalSources)
+        foreach(SourceBase source in _publicSources)
         {
             source.Dispose();
         }
@@ -245,7 +245,7 @@ internal class LibraryManager : IDisposable
             AddSource(new FileSource(_fileService, sourceConfig));
         }
 
-        foreach(SourceBase source in _internalSources)
+        foreach(SourceBase source in _publicSources)
         {
             _rootItem.Add(source);
         }
@@ -278,7 +278,7 @@ internal class LibraryManager : IDisposable
         try
         {
             List<Task> scanTasks = new();
-            foreach(SourceBase source in _internalSources)
+            foreach(SourceBase source in _publicSources)
             {
                 scanTasks.Add(Task.Run(() => ScanSource(source)));
             }

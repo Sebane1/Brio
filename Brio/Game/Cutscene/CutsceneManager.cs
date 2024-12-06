@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Actor;
+using Brio.Capabilities.Actor;
 using Brio.Entities;
 using Brio.Game.Actor.Extensions;
 using Brio.Game.Camera;
@@ -16,7 +16,7 @@ using System.Numerics;
 
 namespace Brio.Game.Cutscene;
 
-internal class CutsceneManager : IDisposable
+public class CutsceneManager : IDisposable
 {
     private const double FRAME_STEP = 33.33333333333333;
 

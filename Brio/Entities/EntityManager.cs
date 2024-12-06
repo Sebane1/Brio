@@ -16,7 +16,7 @@ using Brio.Capabilities.Actor;
 
 namespace Brio.Entities;
 
-internal unsafe partial class EntityManager : IDisposable
+public unsafe partial class EntityManager : IDisposable
 {
     private readonly IServiceProvider _serviceProvider;
 

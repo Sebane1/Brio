@@ -9,7 +9,7 @@ using System;
 
 namespace Brio.Capabilities.Actor;
 
-internal unsafe class CompanionCapability : ActorCharacterCapability
+public unsafe class CompanionCapability : ActorCharacterCapability
 {
     public ModeType Mode { get; }
 

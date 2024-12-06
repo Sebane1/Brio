@@ -14,7 +14,7 @@ using System.Numerics;
 
 namespace Brio.UI.Windows;
 
-internal class SettingsWindow : Window
+public class SettingsWindow : Window
 {
     private readonly ConfigurationService _configurationService;
     private readonly PenumbraService _penumbraService;

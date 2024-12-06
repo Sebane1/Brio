@@ -2,7 +2,7 @@
 using System.Numerics;
 
 namespace Brio.UI;
-internal static class BrioStyle
+public static class BrioStyle
 {
     public static bool EnableStyle { get; set; }
 

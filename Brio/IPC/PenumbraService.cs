@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace Brio.IPC;
 
-internal class PenumbraService : IDisposable
+public class PenumbraService : IDisposable
 {
     public bool IsPenumbraAvailable { get; private set; } = false;
 

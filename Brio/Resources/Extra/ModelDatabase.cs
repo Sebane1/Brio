@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Brio.Resources.Extra;
 
-internal class ModelDatabase
+public class ModelDatabase
 {
     private readonly MultiValueDictionary<ulong, ModelInfo> _modelLookupTable;
     private readonly List<ModelInfo> _modelsList;

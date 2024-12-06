@@ -6,7 +6,7 @@ using OneOf.Types;
 namespace Brio.Game.Types;
 
 [GenerateOneOf]
-internal partial class CompanionRowUnion : OneOfBase<Companion, Mount, Ornament, None>
+public partial class CompanionRowUnion : OneOfBase<Companion, Mount, Ornament, None>
 {
     public static implicit operator CompanionRowUnion(CompanionContainer container)
     {
@@ -25,7 +25,7 @@ internal partial class CompanionRowUnion : OneOfBase<Companion, Mount, Ornament,
 }
 
 
-internal enum CompanionKind
+public enum CompanionKind
 {
     Companion,
     Mount,
@@ -33,7 +33,7 @@ internal enum CompanionKind
     None
 }
 
-internal record struct CompanionContainer(CompanionKind Kind, ushort Id)
+public record struct CompanionContainer(CompanionKind Kind, ushort Id)
 {
     public static CompanionContainer None { get; } = new CompanionContainer(CompanionKind.None, 0);
 

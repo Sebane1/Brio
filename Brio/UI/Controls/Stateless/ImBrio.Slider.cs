@@ -4,7 +4,7 @@ using ImGuiNET;
 using System.Numerics;
 
 namespace Brio.UI.Controls.Stateless;
-internal static partial class ImBrio
+public static partial class ImBrio
 {
     public static bool SliderFloat3(string label, ref Vector3 value, float min, float max, string format = "%.2f", ImGuiSliderFlags flags = ImGuiSliderFlags.None, float step = 1.0f)
     {

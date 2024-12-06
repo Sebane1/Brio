@@ -8,7 +8,7 @@ using System.Numerics;
 
 namespace Brio.Capabilities.Camera;
 
-internal class CameraCapability : Capability
+public class CameraCapability : Capability
 {
     private readonly CameraService _cameraService;
     private readonly GPoseService _gPoseService;

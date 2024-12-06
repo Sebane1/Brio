@@ -17,7 +17,7 @@ using BrioSceneCamera = FFXIVClientStructs.FFXIV.Client.Graphics.Scene.Camera;
 
 namespace Brio.Game.Camera;
 
-internal unsafe class CameraService : IDisposable
+public unsafe class CameraService : IDisposable
 {
     private readonly EntityManager _entityManager;
     private readonly GPoseService _gPoseService;

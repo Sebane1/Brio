@@ -5,13 +5,13 @@ using System;
 
 namespace Brio.Files;
 
-internal abstract class JsonDocumentBaseFileInfo<T> : FileTypeInfoBase<T>
+public abstract class JsonDocumentBaseFileInfo<T> : FileTypeInfoBase<T>
 {
     public override object? Load(string filePath) => ResourceProvider.Instance.GetFileDocument<T>(filePath);
 }
 
 [Serializable]
-internal abstract class JsonDocumentBase : IFileMetadata
+public abstract class JsonDocumentBase : IFileMetadata
 {
     public string? Author { get; set; }
     public string? Description { get; set; }

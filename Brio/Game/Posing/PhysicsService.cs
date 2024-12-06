@@ -34,7 +34,7 @@ using System.Runtime.InteropServices;
 
 namespace Brio.Game.Posing;
 
-internal unsafe partial class PhysicsService : IDisposable
+public unsafe partial class PhysicsService : IDisposable
 {
     private readonly GPoseService _gPoseService;
     private readonly IFramework _framework;

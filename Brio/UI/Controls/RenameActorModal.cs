@@ -4,7 +4,7 @@ using ImGuiNET;
 using System.Numerics;
 
 namespace Brio.UI.Controls;
-internal class RenameActorModal
+public class RenameActorModal
 {
     static Vector2 MinimumSize = new(400, 95);
     static bool IsOpen = false;

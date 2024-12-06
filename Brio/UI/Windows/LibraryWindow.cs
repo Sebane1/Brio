@@ -23,7 +23,7 @@ using System.Numerics;
 
 namespace Brio.UI.Windows;
 
-internal class LibraryWindow : Window
+public class LibraryWindow : Window
 {
     private static float WindowContentWidth => ImGui.GetWindowContentRegionMax().X - ImGui.GetWindowContentRegionMin().X;
     private static float WindowContentHeight => ImGui.GetWindowContentRegionMax().Y - ImGui.GetWindowContentRegionMin().Y;
@@ -288,7 +288,7 @@ internal class LibraryWindow : Window
 
     public override void Draw()
     {
-        DrawInternal();
+        Drawpublic();
     }
 
     public override bool DrawConditions()
@@ -312,12 +312,12 @@ internal class LibraryWindow : Window
         {
             if(popup.Success)
             {
-                DrawInternal();
+                Drawpublic();
             }
         }
     }
 
-    private void DrawInternal()
+    private void Drawpublic()
     {
         using(ImRaii.PushId("brio_library"))
         {

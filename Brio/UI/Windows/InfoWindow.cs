@@ -7,7 +7,7 @@ using System.Numerics;
 
 namespace Brio.UI.Windows;
 
-internal class InfoWindow : Window
+public class InfoWindow : Window
 {
     private readonly ConfigurationService _configurationService;
     private readonly UpdateWindow _updateWindow;

@@ -12,7 +12,7 @@ using System.Numerics;
 
 namespace Brio.UI.Windows.Specialized;
 
-internal class ActionTimelineWindow : Window, IDisposable
+public class ActionTimelineWindow : Window, IDisposable
 {
     private readonly ActionTimelineEditor _editor;
     private readonly EntityManager _entityManager;

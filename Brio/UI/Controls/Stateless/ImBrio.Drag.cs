@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace Brio.UI.Controls.Stateless;
 
-internal static partial class ImBrio
+public static partial class ImBrio
 {
     public static (bool anyActive, bool didChange) DragFloat3(string label, ref Vector3 vectorValue, float step = 1.0f, FontAwesomeIcon icon = FontAwesomeIcon.None, string tooltip = "")
     {

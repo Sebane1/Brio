@@ -1,4 +1,4 @@
-﻿using Brio.Config;
+using Brio.Config;
 using Brio.Entities;
 using Brio.Input;
 using Brio.UI.Controls.Stateless;
@@ -12,7 +12,7 @@ using System.Numerics;
 
 namespace Brio.UI.Windows;
 
-internal class MainWindow : Window, IDisposable
+public class MainWindow : Window, IDisposable
 {
     private readonly SettingsWindow _settingsWindow;
     private readonly InfoWindow _infoWindow;
@@ -75,7 +75,7 @@ internal class MainWindow : Window, IDisposable
 
     private void OnMainWindowToggle()
     {
-        this.IsOpen = !this.IsOpen;
+        //this.IsOpen = !this.IsOpen;
     }
 
     private void OnPromptWindowToggle()

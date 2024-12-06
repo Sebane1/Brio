@@ -7,7 +7,7 @@ using ImGuiNET;
 
 namespace Brio.UI.Widgets.Actor;
 
-internal class ActorLifetimeWidget(ActorLifetimeCapability capability) : Widget<ActorLifetimeCapability>(capability)
+public class ActorLifetimeWidget(ActorLifetimeCapability capability) : Widget<ActorLifetimeCapability>(capability)
 {
     public override string HeaderName => "Lifetime";
 

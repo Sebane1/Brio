@@ -1,4 +1,4 @@
-﻿using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
+using FFXIVClientStructs.FFXIV.Client.Graphics.Render;
 using FFXIVClientStructs.FFXIV.Client.Graphics.Scene;
 using FFXIVClientStructs.FFXIV.Client.System.Framework;
 using System.Numerics;
@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 namespace Brio.Game.Actor.Interop;
 
 [StructLayout(LayoutKind.Explicit, Size = 0x9D0)]
-internal struct BrioCharacterBase
+public struct BrioCharacterBase
 {
     [FieldOffset(0x0)] public CharacterBase CharacterBase;
 
@@ -26,7 +26,7 @@ internal struct BrioCharacterBase
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x78)]
-internal unsafe struct Attach
+public unsafe struct Attach
 {
     [FieldOffset(0x0)] public Task Task;
 
@@ -40,12 +40,12 @@ internal unsafe struct Attach
 }
 
 [StructLayout(LayoutKind.Explicit, Size = 0x68)]
-internal struct AttachmentEntry
+public struct AttachmentEntry
 {
     [FieldOffset(0x02)] public ushort BoneIdx;
 }
 
-internal enum AttachType : uint
+public enum AttachType : uint
 {
     None = 0,
     Unknown1 = 1,

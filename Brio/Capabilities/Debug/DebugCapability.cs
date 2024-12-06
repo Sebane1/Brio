@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Core;
+using Brio.Capabilities.Core;
 using Brio.Entities.Core;
 using Brio.Game.GPose;
 using Brio.UI.Widgets.Debug;
@@ -12,7 +12,7 @@ using System.Collections.Generic;
 
 namespace Brio.Capabilities.Debug;
 
-internal unsafe class DebugCapability : Capability
+public unsafe class DebugCapability : Capability
 {
     private readonly GPoseService _gPoseService;
 

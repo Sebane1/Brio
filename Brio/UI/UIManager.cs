@@ -1,4 +1,4 @@
-﻿using Brio.Config;
+using Brio.Config;
 using Brio.Game.GPose;
 using Brio.IPC;
 using Brio.UI.Controls;
@@ -15,7 +15,7 @@ using System.Collections.Generic;
 
 namespace Brio.UI;
 
-internal class UIManager : IDisposable
+public class UIManager : IDisposable
 {
     private readonly IDalamudPluginInterface _pluginInterface;
     private readonly GPoseService _gPoseService;
@@ -143,27 +143,27 @@ internal class UIManager : IDisposable
 
     public void ToggleAppearanceWindow()
     {
-        _actorAppearanceWindow.IsOpen = !_actorAppearanceWindow.IsOpen;
+       // _actorAppearanceWindow.IsOpen = !_actorAppearanceWindow.IsOpen;
     }
 
     public void ToggleActionTimelineWindow()
     {
-        _actionTimelineWindow.IsOpen = !_actionTimelineWindow.IsOpen;
+       // _actionTimelineWindow.IsOpen = !_actionTimelineWindow.IsOpen;
     }
 
     public void ToggleGraphicalPosingWindow()
     {
-        _graphicalWindow.IsOpen = !_graphicalWindow.IsOpen;
+       // _graphicalWindow.IsOpen = !_graphicalWindow.IsOpen;
     }
 
     public void ShowSettingsWindow()
     {
-        _settingsWindow.IsOpen = true;
+       // _settingsWindow.IsOpen = true;
     }
 
     public void ShowMainWindow()
     {
-        _mainWindow.IsOpen = true;
+       // _mainWindow.IsOpen = true;
     }
 
     private void ActivePluginsChanged(PluginListInvalidationKind kind, bool affectedThisPlugin)
@@ -190,8 +190,8 @@ internal class UIManager : IDisposable
 
     private void OnGPoseStateChange(bool newState)
     {
-        if(_configurationService.Configuration.Interface.OpenBrioBehavior == OpenBrioBehavior.OnGPoseEnter)
-            _mainWindow.IsOpen = newState;
+        //if(_configurationService.Configuration.Interface.OpenBrioBehavior == OpenBrioBehavior.OnGPoseEnter)
+        //    _mainWindow.IsOpen = newState;
     }
 
     private void ApplySettings()

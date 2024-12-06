@@ -1,4 +1,4 @@
-﻿using Brio.Core;
+using Brio.Core;
 using Brio.Entities.Actor;
 using Brio.Files;
 using Brio.Game.Actor;
@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Brio.Capabilities.Actor;
 
-internal class ActorAppearanceCapability : ActorCharacterCapability
+public class ActorAppearanceCapability : ActorCharacterCapability
 {
     private readonly ActorAppearanceService _actorAppearanceService;
     private readonly PenumbraService _penumbraService;

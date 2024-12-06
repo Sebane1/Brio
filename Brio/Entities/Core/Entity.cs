@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Brio.Entities.Core;
 
-internal abstract class Entity : IDisposable
+public abstract class Entity : IDisposable
 {
     public EntityId Id { get; private set; }
 
@@ -216,7 +216,7 @@ internal abstract class Entity : IDisposable
 }
 
 [Flags]
-internal enum EntityFlags
+public enum EntityFlags
 {
     None,
     DefaultOpen = 1 << 0,

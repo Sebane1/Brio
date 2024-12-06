@@ -19,7 +19,7 @@ using System.Numerics;
 
 namespace Brio.UI.Controls.Stateless;
 
-internal class FileUIHelpers
+public class FileUIHelpers
 {
     public static void DrawImportPoseMenuPopup(PosingCapability capability, bool showImportOptions = true)
     {

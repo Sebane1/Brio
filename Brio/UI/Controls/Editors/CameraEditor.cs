@@ -6,7 +6,7 @@ using System.Numerics;
 
 namespace Brio.UI.Controls.Editors;
 
-internal static class CameraEditor
+public static class CameraEditor
 {
     struct CameraPresetProperties(Vector3 offset, float rotation, float zoom, float fov, Vector2 pan, Vector2 angle, bool disableCollision, bool delimitCamera)
     {

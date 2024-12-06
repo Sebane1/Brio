@@ -15,7 +15,7 @@ using System.Linq;
 
 namespace Brio.Game.World;
 
-internal class WeatherService : IDisposable
+public class WeatherService : IDisposable
 {
     public ReadOnlyCollection<Weather> TerritoryWeatherTable
     {

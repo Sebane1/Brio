@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace Brio.Core;
 
-internal class WelcomeService
+public class WelcomeService
 {
     public WelcomeService(ConfigurationService configService, MainWindow mainWindow, InfoWindow infoWindow, UpdateWindow updateWindow)
     {

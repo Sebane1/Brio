@@ -11,7 +11,7 @@ using System.Numerics;
 
 namespace Brio.UI.Controls.Editors;
 
-internal static class PosingEditorCommon
+public static class PosingEditorCommon
 {
     public static void DrawSelectionName(PosingCapability posing)
     {

@@ -9,7 +9,7 @@ using System.Numerics;
 
 namespace Brio.UI.Controls.Editors;
 
-internal class PosingTransformEditor
+public class PosingTransformEditor
 {
     private Transform? _trackingTransform;
     private Vector3? _trackingEuler;

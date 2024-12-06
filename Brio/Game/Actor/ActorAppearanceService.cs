@@ -18,7 +18,7 @@ using DrawDataContainer = FFXIVClientStructs.FFXIV.Client.Game.Character.DrawDat
 
 namespace Brio.Game.Actor;
 
-internal class ActorAppearanceService : IDisposable
+public class ActorAppearanceService : IDisposable
 {
     private readonly GPoseService _gPoseService;
     private readonly ConfigurationService _configurationService;

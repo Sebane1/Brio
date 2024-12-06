@@ -18,7 +18,7 @@ using System.Numerics;
 
 namespace Brio.Files;
 
-internal class PoseFileInfo : AppliableActorFileInfoBase<PoseFile>
+public class PoseFileInfo : AppliableActorFileInfoBase<PoseFile>
 {
     private PosingService _posingService;
 
@@ -63,7 +63,7 @@ internal class PoseFileInfo : AppliableActorFileInfoBase<PoseFile>
 }
 
 [Serializable]
-internal class PoseFile : JsonDocumentBase
+public class PoseFile : JsonDocumentBase
 {
     public Bone ModelDifference { get; set; } = Transform.Identity;
 

@@ -1,14 +1,14 @@
-﻿using Brio.UI;
+using Brio.UI;
 using Dalamud.Game.Command;
 using Dalamud.Plugin.Services;
 using System;
 
 namespace Brio.Game.Chat;
 
-internal class CommandHandlerService : IDisposable
+public class CommandHandlerService : IDisposable
 {
-    private const string BrioCommandName = "/brio";
-    private const string XATCommandName = "/xat";
+    //private const string BrioCommandName = "/brio";
+    //private const string XATCommandName = "/xat";
 
     private readonly ICommandManager _commandManager;
     private readonly IChatGui _chatGui;
@@ -20,16 +20,16 @@ internal class CommandHandlerService : IDisposable
         _chatGui = chatGui;
         _uiManager = uiManager;
 
-        _commandManager.AddHandler(BrioCommandName, new CommandInfo(OnCommand)
-        {
-            HelpMessage = "Toggles the Brio window.",
-            ShowInHelp = true,
-        });
-        _commandManager.AddHandler(XATCommandName, new CommandInfo(OnCommand)
-        {
-            HelpMessage = "Toggles the Brio window.",
-            ShowInHelp = false,
-        });
+        //_commandManager.AddHandler(BrioCommandName, new CommandInfo(OnCommand)
+        //{
+        //    HelpMessage = "Toggles the Brio window.",
+        //    ShowInHelp = true,
+        //});
+        //_commandManager.AddHandler(XATCommandName, new CommandInfo(OnCommand)
+        //{
+        //    HelpMessage = "Toggles the Brio window.",
+        //    ShowInHelp = false,
+        //});
     }
 
     private void OnCommand(string command, string arguments)
@@ -73,7 +73,7 @@ internal class CommandHandlerService : IDisposable
 
     public void Dispose()
     {
-        _commandManager.RemoveHandler(BrioCommandName);
-        _commandManager.RemoveHandler(XATCommandName);
+        //_commandManager.RemoveHandler(BrioCommandName);
+        //_commandManager.RemoveHandler(XATCommandName);
     }
 }

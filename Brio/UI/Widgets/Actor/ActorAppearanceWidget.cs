@@ -9,7 +9,7 @@ using ImGuiNET;
 
 namespace Brio.UI.Widgets.Actor;
 
-internal class ActorAppearanceWidget(ActorAppearanceCapability capability) : Widget<ActorAppearanceCapability>(capability)
+public class ActorAppearanceWidget(ActorAppearanceCapability capability) : Widget<ActorAppearanceCapability>(capability)
 {
     public override string HeaderName => "Appearance";
 

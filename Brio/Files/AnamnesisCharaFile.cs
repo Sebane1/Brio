@@ -12,7 +12,7 @@ using System.Text.Json.Serialization;
 
 namespace Brio.Files;
 
-internal class AnamnesisCharaFileInfo(EntityManager entityManager) : AppliableActorFileInfoBase<AnamnesisCharaFile>(entityManager)
+public class AnamnesisCharaFileInfo(EntityManager entityManager) : AppliableActorFileInfoBase<AnamnesisCharaFile>(entityManager)
 {
     public override string Name => "Character File";
     public override IDalamudTextureWrap Icon => ResourceProvider.Instance.GetResourceImage("Images.FileIcon_Chara.png");
@@ -28,7 +28,7 @@ internal class AnamnesisCharaFileInfo(EntityManager entityManager) : AppliableAc
 }
 
 [Serializable]
-internal class AnamnesisCharaFile : JsonDocumentBase
+public class AnamnesisCharaFile : JsonDocumentBase
 {
     public uint ModelType { get; set; } = 0;
     public Races Race { get; set; }
@@ -225,7 +225,7 @@ internal class AnamnesisCharaFile : JsonDocumentBase
         return charaFile;
     }
 
-    internal struct ItemSave
+    public struct ItemSave
     {
         public ushort ModelBase { get; set; }
         public byte ModelVariant { get; set; }
@@ -250,7 +250,7 @@ internal class AnamnesisCharaFile : JsonDocumentBase
         };
     }
 
-    internal struct GlassesSave
+    public struct GlassesSave
     {
         public ushort GlassesId { get; set; }
 
@@ -262,7 +262,7 @@ internal class AnamnesisCharaFile : JsonDocumentBase
         };
     }
 
-    internal struct WeaponSave
+    public struct WeaponSave
     {
         public Vector3 Color { get; set; }
         public Vector3 Scale { get; set; }
