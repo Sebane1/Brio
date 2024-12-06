@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Actor;
+using Brio.Capabilities.Actor;
 using Brio.Capabilities.Posing;
 using Brio.Config;
 using Brio.Files;

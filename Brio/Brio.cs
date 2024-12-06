@@ -118,11 +118,9 @@ public class Brio
         serviceCollection.AddSingleton<ConfigurationService>();
         serviceCollection.AddSingleton<ResourceProvider>();
         serviceCollection.AddSingleton<GameDataProvider>();
-        serviceCollection.AddSingleton<WelcomeService>();
         serviceCollection.AddSingleton<InputService>();
 
         // IPC
-        //serviceCollection.AddSingleton<BrioIPCService>();
         serviceCollection.AddSingleton<PenumbraService>();
         serviceCollection.AddSingleton<GlamourerService>();
         serviceCollection.AddSingleton<MareService>();
