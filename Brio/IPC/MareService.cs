@@ -1,4 +1,4 @@
-﻿using Brio.Config;
+using Brio.Config;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Ipc;
@@ -10,6 +10,7 @@ namespace Brio.IPC;
 public class MareService : IDisposable
 {
     public bool IsMareAvailable { get; private set; } = false;
+
 
     private readonly IDalamudPluginInterface _pluginInterface;
     private readonly ConfigurationService _configurationService;
@@ -52,6 +53,7 @@ public class MareService : IDisposable
 
         try
         {
+            // Todo: Need a way to tell Mare that they can still sync other players?
             return _mareApplyMcdf.InvokeFunc(fileName, target);
         }
         catch(Exception ex)

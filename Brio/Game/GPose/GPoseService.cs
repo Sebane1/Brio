@@ -91,7 +91,7 @@ public unsafe class GPoseService : IDisposable
         if(ef == null)
             return;
 
-        ef->EventSceneModule.EventGPoseController.AddCharacterToGPose(chara);
+        //ef->EventSceneModule.EventGPoseController.AddCharacterToGPose(chara);
 
     }
 

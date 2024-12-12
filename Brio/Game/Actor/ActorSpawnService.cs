@@ -30,6 +30,8 @@ public class ActorSpawnService : IDisposable
 
     private readonly List<ushort> _createdIndexes = [];
 
+    public TargetService TargetService => _targetService;
+
     public unsafe ActorSpawnService(ObjectMonitorService monitorService, GlamourerService glamourerService, IObjectTable objectTable, IClientState clientState, IFramework framework, GPoseService gPoseService, ActorRedrawService actorRedrawService, TargetService targetService)
     {
         _monitorService = monitorService;
@@ -261,7 +263,7 @@ public class ActorSpawnService : IDisposable
 
             newObject->CalculateAndSetName(newId); // Brio One etc
 
-            _gPoseService.AddCharacterToGPose(newPlayer);
+            //_gPoseService.AddCharacterToGPose(newPlayer);
 
             var character = _objectTable.CreateObjectReference((nint)newObject);
             if(character == null || character is not ICharacter)
