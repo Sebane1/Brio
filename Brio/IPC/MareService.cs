@@ -22,7 +22,7 @@ public class MareService : IDisposable
         _pluginInterface = pluginInterface;
         _configurationService = configurationService;
 
-        _mareApplyMcdf = pluginInterface.GetIpcSubscriber<string, IGameObject, bool>("MareSynchronos.LoadMcdf");
+        _mareApplyMcdf = pluginInterface.GetIpcSubscriber<string, IGameObject, bool>("McdfStandalone.LoadMcdf");
 
         RefreshMareStatus();
 
@@ -67,7 +67,7 @@ public class MareService : IDisposable
     {
         try
         {
-            bool mareInstalled = _pluginInterface.InstalledPlugins.Any(x => x.Name == "Mare Synchronos" && x.IsLoaded == true);
+            bool mareInstalled = _pluginInterface.InstalledPlugins.Any(x => x.Name == "A Quest Reborn" && x.IsLoaded == true);
 
             if(!mareInstalled)
             {
