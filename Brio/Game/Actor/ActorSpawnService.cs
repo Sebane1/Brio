@@ -272,9 +272,6 @@ public class ActorSpawnService : IDisposable
             outCharacter = (ICharacter)character;
         }
 
-        if(_gPoseService.IsGPosing && _targetService.GPoseTarget == null)
-            _targetService.GPoseTarget = outCharacter;
-
         return true;
     }
 
