@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Posing;
+using Brio.Capabilities.Posing;
 using Brio.Entities;
 using Brio.Game.Actor;
 using Brio.Game.Actor.Extensions;
@@ -58,8 +58,16 @@ public unsafe class ModelTransformService : IDisposable
         var drawObject = native->DrawObject;
         if(drawObject != null)
         {
+            native->Position = transform.Position;
+            native->Rotation = ConvertDegreesToRadians(transform.Rotation.EulerAngles.Y);
+            native->Scale = transform.Scale.Y;
             *(Transform*)(&drawObject->Object.Position) = transform;
         }
+    }
+    public static float ConvertDegreesToRadians(float degrees)
+    {
+        double radians = degrees * (Math.PI / 180);
+        return (float)radians;
     }
 
     private void UpdatePositionDetour(StructsGameObject* gameObject, float x, float y, float z)

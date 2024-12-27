@@ -32,7 +32,7 @@ public unsafe class GPoseService : IDisposable
         }
     }
 
-    private bool _isInGPose = false;
+    private bool _isInGPose = true;
     private bool _isInFakeGPose = true;
 
     private delegate bool GPoseEnterExitDelegate(UIModule* uiModule);
@@ -52,8 +52,6 @@ public unsafe class GPoseService : IDisposable
         _framework = framework;
         _clientState = clientState;
         _configService = configService;
-
-        _isInGPose = _clientState.IsGPosing;
 
         UIModule* uiModule = Framework.Instance()->UIModule;
         var enterGPoseAddress = (nint)uiModule->VirtualTable->EnterGPose;

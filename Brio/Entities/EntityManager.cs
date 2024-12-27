@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Core;
+using Brio.Capabilities.Core;
 using Brio.Config;
 using Brio.Entities.Actor;
 using Brio.Entities.Camera;
@@ -48,6 +48,7 @@ public unsafe partial class EntityManager : IDisposable
     {
         _serviceProvider = serviceProvider;
         _configurationService = configurationService;
+        BrioAccessUtils.EntityManager = this;
     }
 
     public void SetupDefaultEntities()

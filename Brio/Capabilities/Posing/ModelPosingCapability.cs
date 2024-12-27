@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Actor;
+using Brio.Capabilities.Actor;
 using Brio.Core;
 using Brio.Entities.Actor;
 using Brio.Files;
@@ -14,14 +14,11 @@ public class ModelPosingCapability : ActorCharacterCapability
     {
         get
         {
-            if(_transformOverride.HasValue)
-                return _transformOverride.Value;
-
             return _transformService.GetTransform(GameObject);
         }
         set
         {
-            _originalTransform ??= Transform;
+            _originalTransform = value;
             _transformOverride = value;
             _transformService.SetTransform(GameObject, value);
         }
