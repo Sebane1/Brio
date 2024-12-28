@@ -1,4 +1,4 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Numerics;
 using System.Text;
 
@@ -8,14 +8,14 @@ public static class IntExtensions
 {
     public static string ToWords(this int number, string separator = " ")
     {
-        string[] ones = { "", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
+        string[] ones = { "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen" };
         string[] tens = { "", "", "Twenty", "Thirty", "Forty", "Fifty", "Sixty", "Seventy", "Eighty", "Ninety" };
 
         StringBuilder result = new();
 
         if(number < 100)
         {
-             if(number < 20)
+            if(number < 20)
             {
                 result.Append(ones[number]);
             }
@@ -47,7 +47,7 @@ public static class IntExtensions
                 result.Append(separator);
                 result.Append("Hundred");
                 result.Append(separator);
-                result.Append(ToWords(remainder, "")); 
+                result.Append(ToWords(remainder, ""));
             }
         }
 
