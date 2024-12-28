@@ -1,4 +1,4 @@
-﻿using Brio.Core;
+using Brio.Core;
 using Dalamud.Game.ClientState.Objects.Enums;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Interface;
@@ -51,7 +51,7 @@ public static class GameObjectExtensions
 
     public static bool IsGPose(this IGameObject go)
     {
-        return go.ObjectIndex >= ActorTableHelpers.GPoseStart && go.ObjectIndex <= ActorTableHelpers.GPoseEnd;
+        return go.ObjectIndex <= ActorTableHelpers.GPoseEnd;
     }
 
     public static bool IsOverworld(this IGameObject go)
