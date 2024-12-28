@@ -28,7 +28,7 @@ public unsafe class GPoseService : IDisposable
 
             _isInFakeGPose = value;
 
-            TriggerGPoseChange();
+            //TriggerGPoseChange();
         }
     }
 
@@ -119,8 +119,8 @@ public unsafe class GPoseService : IDisposable
     private void OnFrameworkUpdate(IFramework framework)
     {
         // Only detect if we got snapped out
-        if(!_clientState.IsGPosing && _isInGPose)
-            HandleGPoseStateChange(_clientState.IsGPosing);
+        //if(!_clientState.IsGPosing && _isInGPose)
+        //    HandleGPoseStateChange(_clientState.IsGPosing);
     }
 
     private void HandleGPoseStateChange(bool newState)
@@ -130,9 +130,9 @@ public unsafe class GPoseService : IDisposable
 
         _isInGPose = true;
 
-        UpdateDynamicHooks();
+        //UpdateDynamicHooks();
 
-        TriggerGPoseChange();
+        //TriggerGPoseChange();
     }
 
     private void UpdateDynamicHooks()
