@@ -262,9 +262,10 @@ public class ActorSpawnService : IDisposable
             if(newObject == null) return false;
             var newPlayer = (NativeCharacter*)newObject;
 
-            string name = Regex.Replace(Guid.NewGuid().ToString(), @"[\d-]", string.Empty).Substring(0, 13).Replace("-", "");
+            string raw = "Quest" + Regex.Replace(Guid.NewGuid().ToString(), @"[\d-]", string.Empty).Replace("-", "");
+            string name = raw.Substring(0, Math.Clamp(raw.Length, 0, 14));
             int length = name.Length / 2;
-            newObject->SetName(FirstCharToUpper("A" + name.Substring(0, length)) + " " + FirstCharToUpper("R" + name.Substring(length))); // Brio One etc
+            newObject->SetName(FirstCharToUpper(name.Substring(0, length)) + " " + FirstCharToUpper(name.Substring(length))); // Brio One etc
 
             //_gPoseService.AddCharacterToGPose(newPlayer);
 
