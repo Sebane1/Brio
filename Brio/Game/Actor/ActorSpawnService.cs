@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Numerics;
+using static FFXIVClientStructs.FFXIV.Client.Graphics.Kernel.VertexShader;
+using System.Text.RegularExpressions;
 using CharacterCopyFlags = FFXIVClientStructs.FFXIV.Client.Game.Character.CharacterSetupContainer.CopyFlags;
 using ClientObjectManager = FFXIVClientStructs.FFXIV.Client.Game.Object.ClientObjectManager;
 using NativeCharacter = FFXIVClientStructs.FFXIV.Client.Game.Character.Character;
@@ -258,10 +260,11 @@ public class ActorSpawnService : IDisposable
 
             var newObject = com->GetObjectByIndex(newId);
             if(newObject == null) return false;
-
             var newPlayer = (NativeCharacter*)newObject;
 
-            newObject->CalculateAndSetName(newId); // Brio One etc
+            string name = Regex.Replace(Guid.NewGuid().ToString(), @"[\d-]", string.Empty).Substring(0, 13).Replace("-", "");
+            int length = name.Length / 2;
+            newObject->SetName(FirstCharToUpper("A" + name.Substring(0, length)) + " " + FirstCharToUpper("R" + name.Substring(length))); // Brio One etc
 
             //_gPoseService.AddCharacterToGPose(newPlayer);
 
@@ -274,7 +277,12 @@ public class ActorSpawnService : IDisposable
 
         return true;
     }
-
+    public static string FirstCharToUpper(string input)
+    {
+        if(String.IsNullOrEmpty(input))
+            throw new ArgumentException("ARGH!");
+        return input.First().ToString().ToUpper() + String.Join("", input.Skip(1));
+    }
     private void OnGPoseStateChanged(bool newState)
     {
         if(!newState)
