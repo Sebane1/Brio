@@ -54,22 +54,22 @@ public class TargetService : IDisposable
     {
         try
         {
-            var currentBrioAddr = BrioTarget?.Address ?? 0;
-            if(currentBrioAddr != 0 && _lastBrioTarget != currentBrioAddr)
-            {
-                if(_configService.Configuration.Posing.GPoseTargetChangesWithBrio)
-                    GPoseTarget = BrioTarget;
-            }
+            //var currentBrioAddr = BrioTarget?.Address ?? 0;
+            //if(currentBrioAddr != 0 && _lastBrioTarget != currentBrioAddr)
+            //{
+            //    if(_configService.Configuration.Posing.GPoseTargetChangesWithBrio)
+            //        GPoseTarget = BrioTarget;
+            //}
 
-            var currentGPoseAddr = GPoseTarget?.Address ?? 0;
-            if(currentGPoseAddr != 0 && _lastGPoseTarget != currentGPoseAddr)
-            {
-                if(_configService.Configuration.Posing.BrioTargetChangesWithGPose)
-                    BrioTarget = GPoseTarget;
-            }
+            //var currentGPoseAddr = GPoseTarget?.Address ?? 0;
+            //if(currentGPoseAddr != 0 && _lastGPoseTarget != currentGPoseAddr)
+            //{
+            //    if(_configService.Configuration.Posing.BrioTargetChangesWithGPose)
+            //        BrioTarget = GPoseTarget;
+            //}
 
-            _lastBrioTarget = currentBrioAddr;
-            _lastGPoseTarget = currentGPoseAddr;
+            //_lastBrioTarget = currentBrioAddr;
+            //_lastGPoseTarget = currentGPoseAddr;
         }
         catch
         {

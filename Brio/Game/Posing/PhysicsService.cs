@@ -146,8 +146,8 @@ public unsafe partial class PhysicsService : IDisposable
     {
         try
         {
-            if(IsFreezeEnabled && _gPoseService.IsGPosing == false)
-                FreezeRevert();
+            //if(IsFreezeEnabled && _gPoseService.IsGPosing == false)
+            //    FreezeRevert();
         }
         catch
         {

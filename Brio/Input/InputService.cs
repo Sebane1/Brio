@@ -78,13 +78,13 @@ public class InputService
     {
         try
         {
-            if(_gPoseService.IsGPosing && _configService.Configuration.Input.EnableKeybinds)
-            {
-                foreach(var evt in Enum.GetValues<KeyBindEvents>())
-                {
-                    this.CheckEvent(evt);
-                }
-            }
+            ////if(_gPoseService.IsGPosing && _configService.Configuration.Input.EnableKeybinds)
+            ////{
+            ////    foreach(var evt in Enum.GetValues<KeyBindEvents>())
+            ////    {
+            ////        this.CheckEvent(evt);
+            ////    }
+            ////}
         }
         catch
         {

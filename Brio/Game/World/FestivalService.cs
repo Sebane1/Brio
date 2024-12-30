@@ -68,13 +68,13 @@ public unsafe class FestivalService : IDisposable
     {
         try
         {
-            var layoutManager = LayoutWorld.Instance()->ActiveLayout;
-            if(_pendingChanges.Count > 0 && layoutManager != null && (layoutManager->FestivalStatus == 5 || layoutManager->FestivalStatus == 0))
-            {
-                var pending = _pendingChanges.Dequeue();
-                if(pending != null)
-                    publicApply(pending);
-            }
+            //var layoutManager = LayoutWorld.Instance()->ActiveLayout;
+            //if(_pendingChanges.Count > 0 && layoutManager != null && (layoutManager->FestivalStatus == 5 || layoutManager->FestivalStatus == 0))
+            //{
+            //    var pending = _pendingChanges.Dequeue();
+            //    if(pending != null)
+            //        publicApply(pending);
+            //}
         }
         catch
         {
