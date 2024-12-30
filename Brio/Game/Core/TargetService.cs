@@ -1,4 +1,4 @@
-﻿using Brio.Config;
+using Brio.Config;
 using Brio.Entities;
 using Brio.Entities.Actor;
 using Dalamud.Game.ClientState.Objects;
@@ -52,22 +52,29 @@ public class TargetService : IDisposable
 
     private void OnFrameworkUpdate(IFramework framework)
     {
-        var currentBrioAddr = BrioTarget?.Address ?? 0;
-        if(currentBrioAddr != 0 && _lastBrioTarget != currentBrioAddr)
+        try
         {
-            if(_configService.Configuration.Posing.GPoseTargetChangesWithBrio)
-                GPoseTarget = BrioTarget;
-        }
+            var currentBrioAddr = BrioTarget?.Address ?? 0;
+            if(currentBrioAddr != 0 && _lastBrioTarget != currentBrioAddr)
+            {
+                if(_configService.Configuration.Posing.GPoseTargetChangesWithBrio)
+                    GPoseTarget = BrioTarget;
+            }
 
-        var currentGPoseAddr = GPoseTarget?.Address ?? 0;
-        if(currentGPoseAddr != 0 && _lastGPoseTarget != currentGPoseAddr)
+            var currentGPoseAddr = GPoseTarget?.Address ?? 0;
+            if(currentGPoseAddr != 0 && _lastGPoseTarget != currentGPoseAddr)
+            {
+                if(_configService.Configuration.Posing.BrioTargetChangesWithGPose)
+                    BrioTarget = GPoseTarget;
+            }
+
+            _lastBrioTarget = currentBrioAddr;
+            _lastGPoseTarget = currentGPoseAddr;
+        }
+        catch
         {
-            if(_configService.Configuration.Posing.BrioTargetChangesWithGPose)
-                BrioTarget = GPoseTarget;
+            
         }
-
-        _lastBrioTarget = currentBrioAddr;
-        _lastGPoseTarget = currentGPoseAddr;
     }
 
     public void Dispose()

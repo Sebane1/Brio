@@ -1,4 +1,4 @@
-﻿using Brio.Core;
+using Brio.Core;
 using Brio.Game.GPose;
 using Brio.Resources;
 using Dalamud.Plugin.Services;
@@ -66,12 +66,19 @@ public unsafe class FestivalService : IDisposable
 
     private void OnFrameworkUpdate(IFramework framework)
     {
-        var layoutManager = LayoutWorld.Instance()->ActiveLayout;
-        if(_pendingChanges.Count > 0 && layoutManager != null && (layoutManager->FestivalStatus == 5 || layoutManager->FestivalStatus == 0))
+        try
         {
-            var pending = _pendingChanges.Dequeue();
-            if(pending != null)
-                publicApply(pending);
+            var layoutManager = LayoutWorld.Instance()->ActiveLayout;
+            if(_pendingChanges.Count > 0 && layoutManager != null && (layoutManager->FestivalStatus == 5 || layoutManager->FestivalStatus == 0))
+            {
+                var pending = _pendingChanges.Dequeue();
+                if(pending != null)
+                    publicApply(pending);
+            }
+        }
+        catch
+        {
+
         }
     }
 

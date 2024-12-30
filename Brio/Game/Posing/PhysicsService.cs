@@ -1,4 +1,4 @@
-﻿
+
 //
 // Code found in this file is from and is inspired by,
 // Anamnesis (https://github.com/imchillin/Anamnesis)
@@ -144,8 +144,15 @@ public unsafe partial class PhysicsService : IDisposable
 
     private void OnFrameworkUpdate(IFramework framework)
     {
-        if(IsFreezeEnabled && _gPoseService.IsGPosing == false)
-            FreezeRevert();
+        try
+        {
+            if(IsFreezeEnabled && _gPoseService.IsGPosing == false)
+                FreezeRevert();
+        }
+        catch
+        {
+
+        }
     }
 
     [LibraryImport("kernel32.dll", SetLastError = true)]
