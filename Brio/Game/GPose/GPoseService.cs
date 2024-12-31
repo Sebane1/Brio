@@ -82,12 +82,12 @@ public unsafe class GPoseService : IDisposable
 
     public void AddCharacterToGPose(NativeCharacter* chara)
     {
-        if(!IsGPosing)
-            return;
+        //if(!IsGPosing)
+        //    return;
 
-        var ef = EventFramework.Instance();
-        if(ef == null)
-            return;
+        //var ef = EventFramework.Instance();
+        //if(ef == null)
+        //    return;
 
         //ef->EventSceneModule.EventGPoseController.AddCharacterToGPose(chara);
 
@@ -110,8 +110,8 @@ public unsafe class GPoseService : IDisposable
 
     private nint GPoseMouseEventDetour(nint a1, nint a2, nint a3)
     {
-        if(_configService.Configuration.Posing.DisableGPoseMouseSelect)
-            return 0;
+        //if(_configService.Configuration.Posing.DisableGPoseMouseSelect)
+        //    return 0;
 
         return _mouseHoverHook.Original(a1, a2, a3);
     }

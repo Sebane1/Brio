@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Posing;
+using Brio.Capabilities.Posing;
 using Brio.Core;
 using Brio.Entities;
 using Brio.Game.Actor.Extensions;

@@ -142,7 +142,7 @@ public class Brio
         serviceCollection.AddSingleton<CommandHandlerService>();
         serviceCollection.AddSingleton<ModelTransformService>();
         serviceCollection.AddSingleton<TimeService>();
-        //serviceCollection.AddSingleton<WeatherService>();
+        serviceCollection.AddSingleton<WeatherService>();
         serviceCollection.AddSingleton<FestivalService>();
         serviceCollection.AddSingleton<WorldRenderingService>();
         serviceCollection.AddSingleton<SkeletonService>();
