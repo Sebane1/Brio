@@ -1,4 +1,4 @@
-﻿using Brio.Config;
+using Brio.Config;
 using Brio.Entities;
 using Brio.Game.Actor.Appearance;
 using Brio.Game.Actor.Extensions;
@@ -126,11 +126,11 @@ public class ActorAppearanceService : IDisposable
                     if(!existingAppearance.Customize.Equals(appearance.Customize))
                         glamourerReset |= true;
 
-                    if(_glamourerService.CheckForLock(character))
-                    {
-                        if(!existingAppearance.Customize.Equals(appearance.Customize) || !existingAppearance.Equipment.Equals(appearance.Equipment))
-                            glamourerUnlocked |= true;
-                    }
+                    //if(_glamourerService.CheckForLock(character))
+                    //{
+                    //    if(!existingAppearance.Customize.Equals(appearance.Customize) || !existingAppearance.Equipment.Equals(appearance.Equipment))
+                    //        glamourerUnlocked |= true;
+                    //}
 
                     if
                     (
