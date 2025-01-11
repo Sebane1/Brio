@@ -110,15 +110,21 @@ public class ActorAppearanceCapability : ActorCharacterCapability
 
     public void ImportAppearance(string file, AppearanceImportOptions options)
     {
-        var doc = ResourceProvider.Instance.GetFileDocument<AnamnesisCharaFile>(file);
-        if(doc.Race == 0 && doc.ModelType == 0)
+        try
         {
-            EventBus.Instance.NotifyError("Invalid character appearance file.");
-            return;
-        }
+            var doc = ResourceProvider.Instance.GetFileDocument<AnamnesisCharaFile>(file);
+            if(doc.Race == 0 && doc.ModelType == 0)
+            {
+                EventBus.Instance.NotifyError("Invalid character appearance file.");
+                return;
+            }
 
-        if(doc != null)
-            _ = SetAppearance(doc, options);
+            if(doc != null)
+                _ = SetAppearance(doc, options);
+        }
+        catch(Exception ex)
+        {
+        }
     }
 
     public void ExportAppearance(string file)
