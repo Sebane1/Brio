@@ -312,8 +312,10 @@ public class ActorSpawnService : IDisposable
         _monitorService.CharacterDestroyed -= OnCharacterDestroyed;
         _gPoseService.OnGPoseStateChange -= OnGPoseStateChanged;
         _clientState.TerritoryChanged -= OnTerritoryChanged;
-
-        DestroyAllCreated();
+        if(_clientState.IsLoggedIn)
+        {
+            DestroyAllCreated();
+        }
     }
 }
 
