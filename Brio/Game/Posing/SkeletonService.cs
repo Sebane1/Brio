@@ -55,14 +55,11 @@ public unsafe class SkeletonService : IDisposable
         _ikService = ikService;
         _framework = framework;
 
-
         var updateBonePhysicsAddress = "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 56 41 57 48 83 EC ?? 48 8B 79 ?? 45 33 FF";
         _updateBonePhysicsHook = hooking.HookFromAddress<UpdateBonePhysicsDelegate>(scanner.ScanText(updateBonePhysicsAddress), UpdateBonePhysicsDetour);
         _updateBonePhysicsHook.Enable();
 
-        var finalizeSkeletonsHook = "40 53 57 41 55 48 83 EC ?? 65 48 8B 04 25 58"; // JMP in Framework.TaskRenderGraphicsRender
-        _finalizeSkeletonsHook = hooking.HookFromAddress<FinalizeSkeletonsDelegate>(scanner.ScanText(finalizeSkeletonsHook), FinalizeSkeletonsHook);
-        _finalizeSkeletonsHook.Enable();
+        var finalizeSkeletonsHook = "40 53 55 57 41 55 48 83 EC 68"; // JMP in Framework.TaskRenderGraphicsRender
 
         _monitorService.CharacterBaseMaterialsUpdated += OnCharacterBaseMaterialsUpdate;
         _monitorService.CharacterBaseDestroyed += OnCharacterBaseCleanup;
@@ -429,10 +426,10 @@ public unsafe class SkeletonService : IDisposable
 
     public void Dispose()
     {
-        _updateBonePhysicsHook.Dispose();
-        _finalizeSkeletonsHook.Dispose();
         _monitorService.CharacterBaseMaterialsUpdated -= OnCharacterBaseMaterialsUpdate;
         _monitorService.CharacterBaseDestroyed -= OnCharacterBaseCleanup;
+        _updateBonePhysicsHook?.Dispose();
+        _finalizeSkeletonsHook?.Dispose();
     }
 }
 
