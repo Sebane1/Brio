@@ -203,7 +203,8 @@ public unsafe class SkeletonService : IDisposable
         // This is a very hot path, be careful how much you do here.
         // All the main skeleton stuff like positions, IK and physics is done at this point.
 
-        if(!_gPoseService.IsGPosing)
+        //We dont currently need to poke skeleton data yet, but may care about it at some other point. Setting this to true for now.
+        if(true)
             return;
 
         _skeletonsToUpdate.Clear();

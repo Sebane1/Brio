@@ -1,4 +1,4 @@
-﻿using Brio.Core;
+using Brio.Core;
 using Brio.Game.Actor.Interop;
 using FFXIVClientStructs.Havok.Animation.Rig;
 using System;
@@ -154,10 +154,10 @@ public class Skeleton : IDisposable
 
                 Transform pos = pose->AccessBoneModelSpace(id, PropagateOrNot.DontPropagate);
 
-                if(cacheTypes.HasFlag(CacheTypes.LastRawTransform))
+                if((cacheTypes & CacheTypes.LastRawTransform) == CacheTypes.LastRawTransform)
                     bone.LastRawTransform = pos;
 
-                if(cacheTypes.HasFlag(CacheTypes.LastTransform))
+                if((cacheTypes & CacheTypes.LastTransform) == CacheTypes.LastTransform)
                     bone.LastTransform = pos;
             }
 
