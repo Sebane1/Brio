@@ -262,7 +262,7 @@ public class ActorSpawnService : IDisposable
             if(newObject == null) return false;
             var newPlayer = (NativeCharacter*)newObject;
 
-            string raw = "Quest" + Regex.Replace(Guid.NewGuid().ToString(), @"[\d-]", string.Empty).Replace("-", "");
+            string raw = newId == 1 ? "Cutsceneplayer" : "Quest" + Regex.Replace(Guid.NewGuid().ToString(), @"[\d-]", string.Empty).Replace("-", "");
             string name = raw.Substring(0, Math.Clamp(raw.Length, 0, 14));
             int length = name.Length / 2;
             newObject->SetName(FirstCharToUpper(name.Substring(0, length)) + " " + FirstCharToUpper(name.Substring(length))); // Brio One etc
