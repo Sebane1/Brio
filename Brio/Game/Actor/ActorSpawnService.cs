@@ -272,7 +272,7 @@ public class ActorSpawnService : IDisposable
                     raw = "Cutscene Player";
                     break;
                 default:
-                    raw = "Quest" + Regex.Replace(Guid.NewGuid().ToString(), @"[\d-]", string.Empty).Replace("-", "");
+                    raw = "Reborn" + Regex.Replace(Guid.NewGuid().ToString(), @"[\d-]", string.Empty).Replace("-", "");
                     break;
             }
             string name = raw.Substring(0, Math.Clamp(raw.Length, 0, 14));
