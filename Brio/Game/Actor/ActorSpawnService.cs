@@ -277,7 +277,7 @@ public class ActorSpawnService : IDisposable
             }
             string name = raw.Substring(0, Math.Clamp(raw.Length, 0, 14));
             int length = name.Length / 2;
-            newObject->SetName(newId > 1 ? raw : FirstCharToUpper(name.Substring(0, length)) + " " + FirstCharToUpper(name.Substring(length))); // Brio One etc
+            newObject->SetName(newId < 2 ? raw : FirstCharToUpper(name.Substring(0, length)) + " " + FirstCharToUpper(name.Substring(length))); // Brio One etc
 
             //_gPoseService.AddCharacterToGPose(newPlayer);
 
