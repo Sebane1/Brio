@@ -255,7 +255,7 @@ public class ActorSpawnService : IDisposable
                 return false;
             }
             ushort newId = (ushort)idCheck;
-
+            int count = _createdIndexes.Count;
             _createdIndexes.Add(newId);
 
             var newObject = com->GetObjectByIndex(newId);
@@ -263,7 +263,7 @@ public class ActorSpawnService : IDisposable
             var newPlayer = (NativeCharacter*)newObject;
 
             string raw = "";
-            switch(_createdIndexes.Count)
+            switch(count)
             {
                 case 0:
                     raw = "Cutscene Player";
@@ -274,7 +274,7 @@ public class ActorSpawnService : IDisposable
             }
             string name = raw.Substring(0, Math.Clamp(raw.Length, 0, 14));
             int length = name.Length / 2;
-            newObject->SetName(newId < 2 ? raw : FirstCharToUpper(name.Substring(0, length)) + " " + FirstCharToUpper(name.Substring(length))); // Brio One etc
+            newObject->SetName(count == 0 ? raw : FirstCharToUpper(name.Substring(0, length)) + " " + FirstCharToUpper(name.Substring(length))); // Brio One etc
 
             //_gPoseService.AddCharacterToGPose(newPlayer);
 
