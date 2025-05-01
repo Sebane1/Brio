@@ -247,7 +247,7 @@ public class ActorSpawnService : IDisposable
         unsafe
         {
             var com = ClientObjectManager.Instance();
-            uint idCheck = com->CreateBattleCharacter(param: (byte)(flags.HasFlag(SpawnFlags.ReserveCompanionSlot) ? 1 : 0));
+            uint idCheck = com->CreateBattleCharacter((uint)(2 + _createdIndexes.Count), param: (byte)(flags.HasFlag(SpawnFlags.ReserveCompanionSlot) ? 1 : 0));
             if(idCheck == 0xffffffff)
             {
                 Brio.Log.Warning("Failed to create character, invalid ID was returned.");
