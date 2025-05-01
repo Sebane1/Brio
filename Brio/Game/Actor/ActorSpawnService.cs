@@ -263,12 +263,9 @@ public class ActorSpawnService : IDisposable
             var newPlayer = (NativeCharacter*)newObject;
 
             string raw = "";
-            switch(newId)
+            switch(_createdIndexes.Count)
             {
                 case 0:
-                    raw = "UnknownGM";
-                    break;
-                case 1:
                     raw = "Cutscene Player";
                     break;
                 default:
