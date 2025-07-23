@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Core;
+using Brio.Capabilities.Core;
 using Brio.Capabilities.Posing;
 using Brio.Config;
 using Brio.Entities;
