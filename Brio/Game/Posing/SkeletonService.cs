@@ -397,13 +397,16 @@ public unsafe class SkeletonService : IDisposable
     private nint UpdateBonePhysicsDetour(nint a1)
     {
         var result = _updateBonePhysicsHook.Original(a1);
-        try
+        if(BrioAccessUtils.AffectsSkeletons)
         {
-            BeginSkeletonUpdate();
-        }
-        catch(Exception e)
-        {
-            Brio.Log.Error(e, "Error during skeleton update");
+            try
+            {
+                BeginSkeletonUpdate();
+            }
+            catch(Exception e)
+            {
+                Brio.Log.Error(e, "Error during skeleton update");
+            }
         }
         return result;
     }
