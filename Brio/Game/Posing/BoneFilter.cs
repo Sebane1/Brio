@@ -1,4 +1,4 @@
-﻿using Brio.Game.Posing.Skeletons;
+using Brio.Game.Posing.Skeletons;
 using System.Collections.Generic;
 using System.Linq;
 using static Brio.Game.Posing.BoneCategories;
