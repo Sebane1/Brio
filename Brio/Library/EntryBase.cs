@@ -1,10 +1,10 @@
-﻿using Brio.Library.Filters;
+using Brio.Library.Filters;
 using Brio.Library.Sources;
 using Brio.Library.Tags;
 using Brio.UI.Controls.Stateless;
 using Brio.UI.Windows;
 using Dalamud.Interface.Textures.TextureWraps;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 
 namespace Brio.Library;
 
@@ -51,7 +51,7 @@ public abstract class EntryBase : ITagged
             if(this.Source.Icon != null)
             {
                 ImGui.SetCursorPosY(y + 3);
-                ImBrio.ImageFit(this.Source.Icon, new(42, 42));
+                //ImBrio.ImageFit(this.Source.Icon, new(42, 42));
                 sourceIconBottom = ImGui.GetCursorPosY();
 
                 ImGui.SameLine();

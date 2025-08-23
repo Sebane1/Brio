@@ -1,4 +1,4 @@
-﻿
+
 //
 // This file is licensed under the MIT license
 //
@@ -40,7 +40,7 @@ using Brio.UI.Controls.Stateless;
 using Dalamud.Interface;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using System;
 using System.Globalization;
 using System.Numerics;

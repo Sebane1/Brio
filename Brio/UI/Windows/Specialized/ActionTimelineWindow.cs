@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Actor;
+using Brio.Capabilities.Actor;
 using Brio.Config;
 using Brio.Entities;
 using Brio.Game.Cutscene;
@@ -6,7 +6,7 @@ using Brio.Game.GPose;
 using Brio.Game.Posing;
 using Brio.UI.Controls.Editors;
 using Dalamud.Interface.Windowing;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using System;
 using System.Numerics;
 

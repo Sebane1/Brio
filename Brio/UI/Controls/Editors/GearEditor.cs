@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Actor;
+using Brio.Capabilities.Actor;
 using Brio.Game.Actor.Appearance;
 using Brio.Game.Types;
 using Brio.Resources;
@@ -7,7 +7,7 @@ using Brio.UI.Controls.Stateless;
 using Dalamud.Interface;
 using Dalamud.Interface.Utility.Raii;
 using FFXIVClientStructs.FFXIV.Client.Game.Character;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using System.Numerics;
 
 namespace Brio.UI.Controls.Editors;
@@ -146,7 +146,7 @@ public class GearEditor()
                     ImGui.Text(description);
 
                     ImGui.SetNextItemWidth(ImGui.CalcTextSize("XXXXX").X);
-                    if(ImGui.InputInt("##id", ref equipId, 0, 0, ImGuiInputTextFlags.EnterReturnsTrue))
+                    if(ImGui.InputInt("##id", ref equipId, 0, 0, default, ImGuiInputTextFlags.EnterReturnsTrue))
                     {
                         equip.Id = (ushort)equipId;
                         didChange |= true;
@@ -155,7 +155,7 @@ public class GearEditor()
                     ImGui.SameLine();
 
                     ImGui.SetNextItemWidth(ImGui.CalcTextSize("XXXXX").X);
-                    if(ImGui.InputInt("##variant", ref equipVariant, 0, 0, ImGuiInputTextFlags.EnterReturnsTrue))
+                    if(ImGui.InputInt("##variant", ref equipVariant, 0, 0, default, ImGuiInputTextFlags.EnterReturnsTrue))
                     {
                         equip.Variant = (byte)equipVariant;
                         didChange |= true;
@@ -292,7 +292,7 @@ public class GearEditor()
                     ImGui.Text(description);
 
                     ImGui.SetNextItemWidth(ImGui.CalcTextSize("XXXXX").X);
-                    if(ImGui.InputInt("##id", ref equipId, 0, 0, ImGuiInputTextFlags.EnterReturnsTrue))
+                    if(ImGui.InputInt("##id", ref equipId, 0, 0, default, ImGuiInputTextFlags.EnterReturnsTrue))
                     {
                         equip.Id = (ushort)equipId;
                         didChange |= true;
@@ -301,7 +301,7 @@ public class GearEditor()
                     ImGui.SameLine();
 
                     ImGui.SetNextItemWidth(ImGui.CalcTextSize("XXXXX").X);
-                    if(ImGui.InputInt("##type", ref equipType, 0, 0, ImGuiInputTextFlags.EnterReturnsTrue))
+                    if(ImGui.InputInt("##type", ref equipType, 0, 0, default, ImGuiInputTextFlags.EnterReturnsTrue))
                     {
                         equip.Type = (ushort)equipType;
                         didChange |= true;
@@ -310,7 +310,7 @@ public class GearEditor()
                     ImGui.SameLine();
 
                     ImGui.SetNextItemWidth(ImGui.CalcTextSize("XXXXX").X);
-                    if(ImGui.InputInt("##variant", ref equipVariant, 0, 0, ImGuiInputTextFlags.EnterReturnsTrue))
+                    if(ImGui.InputInt("##variant", ref equipVariant, 0, 0, default, ImGuiInputTextFlags.EnterReturnsTrue))
                     {
                         equip.Variant = (byte)equipVariant;
                         didChange |= true;
@@ -446,7 +446,7 @@ public class GearEditor()
 
                     ImGui.SetNextItemWidth(ImGui.CalcTextSize("XXXXX").X);
                     int value = facewearId;
-                    if(ImGui.InputInt("##facewearid", ref value, 0, 0, ImGuiInputTextFlags.EnterReturnsTrue))
+                    if(ImGui.InputInt("##facewearid", ref value, 0, 0, default, ImGuiInputTextFlags.EnterReturnsTrue))
                     {
                         appearance.Facewear = (byte)value;
                         didChange |= true;

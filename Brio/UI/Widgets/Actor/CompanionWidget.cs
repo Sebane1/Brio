@@ -1,11 +1,11 @@
-﻿using Brio.Capabilities.Actor;
+using Brio.Capabilities.Actor;
 using Brio.Game.Actor.Extensions;
 using Brio.Game.Types;
 using Brio.UI.Controls.Selectors;
 using Brio.UI.Controls.Stateless;
 using Brio.UI.Widgets.Core;
 using Dalamud.Interface.Utility.Raii;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 namespace Brio.UI.Widgets.Actor;
 
 public unsafe class CompanionWidget(CompanionCapability capability) : Widget<CompanionCapability>(capability)

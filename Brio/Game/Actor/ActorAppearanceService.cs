@@ -61,7 +61,7 @@ public class ActorAppearanceService : IDisposable
         _updateTintHook = hooks.HookFromAddress<UpdateTintDelegate>((nint)updateTintHook, UpdateTintDetour);
         _updateTintHook.Enable();
 
-        var setFacewearAddress = sigScanner.ScanText("E8 ?? ?? ?? ?? 41 FF C7 41 83 FF ?? 72 ?? 48");
+        var setFacewearAddress = sigScanner.ScanText("e8 ?? ?? ?? ?? ff c3 48 8D ?? ?? ?? ?? ?? ?? ?? 0f");
         _setFacewear = (delegate* unmanaged<DrawDataContainer*, byte, byte, void>)setFacewearAddress;
     }
 

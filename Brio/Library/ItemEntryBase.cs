@@ -1,4 +1,4 @@
-﻿
+
 using Brio.Config;
 using Brio.Library.Filters;
 using Brio.Library.Sources;
@@ -9,7 +9,7 @@ using Brio.UI.Windows;
 using Dalamud.Interface;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using System;
 using System.Numerics;
 
@@ -69,7 +69,7 @@ public abstract class ItemEntryBase : EntryBase
                 if(!child.Success)
                     return;
 
-                ImBrio.ImageFit(this.PreviewImage);
+                //ImBrio.ImageFit(this.PreviewImage);
             }
         }
 

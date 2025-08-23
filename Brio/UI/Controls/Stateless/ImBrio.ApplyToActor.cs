@@ -1,6 +1,6 @@
-﻿using Brio.Entities;
+using Brio.Entities;
 using Brio.Entities.Actor;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using System;
 
 namespace Brio.UI.Controls.Stateless;

@@ -1,6 +1,6 @@
-﻿using Brio.Resources;
+using Brio.Resources;
 using Dalamud.Interface.Textures.TextureWraps;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 
 namespace Brio.UI.Controls.Stateless;
 
@@ -11,7 +11,7 @@ public static partial class ImBrio
         angle += ImGui.GetIO().DeltaTime * speed;
 
         IDalamudTextureWrap img = ResourceProvider.Instance.GetResourceImage("Images.Spinner.png");
-        ImageRotated(img, angle);
+        //ImageRotated(img, angle);
 
         if(angle > 360)
         {

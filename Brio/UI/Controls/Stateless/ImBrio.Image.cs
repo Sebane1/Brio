@@ -1,68 +1,40 @@
-﻿using Dalamud.Interface.Textures.TextureWraps;
-using ImGuiNET;
-using System;
-using System.Numerics;
+using Dalamud.Interface;
+using Dalamud.Interface.Utility.Raii;
+using Dalamud.Bindings.ImGui;
 
 namespace Brio.UI.Controls.Stateless;
-
 public static partial class ImBrio
 {
-    public static void ImageFit(IDalamudTextureWrap texture)
+    public static void TextCentered(string text, float width)
     {
-        ImageFit(texture, ImGui.GetContentRegionAvail());
+        float textWidth = ImGui.CalcTextSize(text).X;
+        float indent = (width - textWidth) * 0.5f;
+
+        if(indent <= 0)
+            indent = 0;
+
+        float x = ImGui.GetCursorPosX() + indent;
+        ImGui.SetCursorPosX(x);
+        ImGui.TextWrapped(text);
     }
 
-    public static void ImageFit(IDalamudTextureWrap texture, Vector2 size)
+    public static void Text(string text, uint color = 0xFFFFFF)
     {
-        if(texture.ImGuiHandle == 0)
-            return;
-
-        float widthScale = 0;
-        float heightScale = 0;
-
-        if(texture.Width != 0)
-            widthScale = size.X / texture.Width;
-
-        if(texture.Height != 0)
-            heightScale = size.Y / texture.Height;
-
-        float scale = Math.Min(widthScale, heightScale);
-        float fitWidth = (texture.Width * scale);
-        float fitHeight = (texture.Height * scale);
-
-        float offsetX = (size.X - fitWidth) / 2;
-        float offsetY = (size.Y - fitHeight) / 2;
-
-        ImGui.SetCursorPosX(ImGui.GetCursorPosX() + offsetX);
-        ImGui.SetCursorPosY(ImGui.GetCursorPosY() + offsetY);
-
-        ImGui.Image(texture.ImGuiHandle, new(fitWidth, fitHeight));
+        ImGui.TextColored(ImGui.ColorConvertU32ToFloat4(color), text);
     }
 
-    public static void ImageRotated(IDalamudTextureWrap texture, float angle)
+    public static void Icon(FontAwesomeIcon icon)
     {
-        if(texture.ImGuiHandle == 0)
-            return;
-
-        Vector2 center = ImGui.GetCursorScreenPos() + (texture.Size / 2);
-        ImageRotated(texture.ImGuiHandle, center, texture.Size, angle);
-    }
-
-    public static void ImageRotated(nint tex_id, Vector2 center, Vector2 size, float angle)
-    {
-        float cos_a = (float)Math.Cos(angle);
-        float sin_a = (float)Math.Sin(angle);
-
-        var pos1 = center + ImRotate(new Vector2(-size.X * 0.5f, -size.Y * 0.5f), cos_a, sin_a);
-        var pos2 = center + ImRotate(new Vector2(+size.X * 0.5f, -size.Y * 0.5f), cos_a, sin_a);
-        var pos3 = center + ImRotate(new Vector2(+size.X * 0.5f, +size.Y * 0.5f), cos_a, sin_a);
-        var pos4 = center + ImRotate(new Vector2(-size.X * 0.5f, +size.Y * 0.5f), cos_a, sin_a);
-
-        ImGui.GetWindowDrawList().AddImageQuad(tex_id, pos1, pos2, pos3, pos4, new Vector2(0.0f, 0.0f), new Vector2(1.0f, 0.0f), new Vector2(1.0f, 1.0f), new Vector2(0.0f, 1.0f), 0xFFFFFFFF);
-    }
-
-    static Vector2 ImRotate(Vector2 v, float cos_a, float sin_a)
-    {
-        return new Vector2((v.X * cos_a) - (v.Y * sin_a), (v.X * sin_a) + (v.Y * cos_a));
+        // Use a button here since we can control its width, unlike text.
+        ImGui.PushStyleColor(ImGuiCol.Button, 0);
+        ImGui.PushStyleColor(ImGuiCol.ButtonHovered, 0);
+        ImGui.PushStyleColor(ImGuiCol.ButtonActive, 0);
+        using(ImRaii.PushFont(UiBuilder.IconFont))
+        {
+            ImGui.Button(icon.ToIconString(), new(25, 0));
+        }
+        ImGui.PopStyleColor();
+        ImGui.PopStyleColor();
+        ImGui.PopStyleColor();
     }
 }

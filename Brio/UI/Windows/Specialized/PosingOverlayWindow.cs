@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Posing;
+using Brio.Capabilities.Posing;
 using Brio.Config;
 using Brio.Core;
 using Brio.Entities;
@@ -10,8 +10,8 @@ using Brio.UI.Controls.Editors;
 using Dalamud.Interface.Utility;
 using Dalamud.Interface.Utility.Raii;
 using Dalamud.Interface.Windowing;
-using ImGuiNET;
-using ImGuizmoNET;
+using Dalamud.Bindings.ImGui;
+using Dalamud.Bindings.ImGuizmo;
 using OneOf.Types;
 using System;
 using System.Collections.Generic;

@@ -9,7 +9,7 @@ using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Windowing;
 using Dalamud.Plugin;
 using Dalamud.Plugin.Services;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using System;
 using System.Collections.Generic;
 
@@ -166,7 +166,7 @@ public class UIManager : IDisposable
        // _mainWindow.IsOpen = true;
     }
 
-    private void ActivePluginsChanged(PluginListInvalidationKind kind, bool affectedThisPlugin)
+    private void ActivePluginsChanged(IActivePluginsChangedEventArgs args)
     {
         foreach(var plugin in _pluginInterface.InstalledPlugins)
         {

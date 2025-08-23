@@ -1,8 +1,8 @@
-﻿using Brio.Capabilities.World;
+using Brio.Capabilities.World;
 using Brio.UI.Controls.Stateless;
 using Brio.UI.Widgets.Core;
 using Dalamud.Interface;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using System;
 using System.Numerics;
 

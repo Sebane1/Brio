@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Posing;
+using Brio.Capabilities.Posing;
 using Brio.Core;
 using Brio.Entities;
 using Brio.Entities.Actor;
@@ -11,7 +11,7 @@ using Brio.UI.Controls.Stateless;
 using Dalamud.Interface;
 using Dalamud.Interface.Textures.TextureWraps;
 using Dalamud.Interface.Utility.Raii;
-using ImGuiNET;
+using Dalamud.Bindings.ImGui;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
