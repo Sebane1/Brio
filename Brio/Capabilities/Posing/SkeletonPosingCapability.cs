@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Actor;
+using Brio.Capabilities.Actor;
 using Brio.Entities.Actor;
 using Brio.Files;
 using Brio.Game.Actor.Appearance;
@@ -28,6 +28,8 @@ namespace Brio.Capabilities.Posing
         public IReadOnlyList<(Skeleton Skeleton, PoseInfoSlot Slot)> Skeletons => new[] { (CharacterSkeleton, PoseInfoSlot.Character), (MainHandSkeleton, PoseInfoSlot.MainHand), (OffHandSkeleton, PoseInfoSlot.OffHand) }.Where(s => s.Item1 != null).Cast<(Skeleton Skeleton, PoseInfoSlot Slot)>().ToList();
 
         public PoseInfo PoseInfo { get; set; } = new PoseInfo();
+
+        public SkeletonService SkeletonService => _skeletonService;
 
         private readonly List<Action<Bone, BonePoseInfo>> _transitiveActions = [];
 

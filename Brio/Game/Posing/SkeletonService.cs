@@ -46,6 +46,7 @@ public unsafe class SkeletonService : IDisposable
 
     private const int PoseCount = 4;
 
+    public List<Skeleton> Skeletons => _skeletons;
 
     public SkeletonService(EntityManager entityManager, ObjectMonitorService monitorService, GPoseService gPoseService, IKService ikService, IFramework framework, ISigScanner scanner, IGameInteropProvider hooking)
     {
@@ -202,11 +203,6 @@ public unsafe class SkeletonService : IDisposable
     {
         // This is a very hot path, be careful how much you do here.
         // All the main skeleton stuff like positions, IK and physics is done at this point.
-
-        //We dont currently need to poke skeleton data yet, but may care about it at some other point. Setting this to true for now.
-        if(true)
-            return;
-
         _skeletonsToUpdate.Clear();
 
         BeginPosingInterval();
@@ -294,7 +290,7 @@ public unsafe class SkeletonService : IDisposable
         prop = info.PropagateComponents.HasFlag(TransformComponents.Rotation);
         modelSpace = pose->AccessBoneModelSpace(boneId, prop ? PropagateOrNot.Propagate : PropagateOrNot.DontPropagate);
         temp = modelSpace;
-        temp.Rotation *= info.Transform.Rotation;
+        temp.Rotation = info.Transform.Rotation;
         modelSpace->Rotation = *(hkQuaternionf*)(&temp.Rotation);
 
         // Scale

@@ -1,4 +1,4 @@
-﻿using Brio.Core;
+using Brio.Core;
 using Brio.Game.Posing.Skeletons;
 using OneOf;
 using System.Collections.Generic;
@@ -85,8 +85,8 @@ public class BonePoseInfo(BonePoseInfoId id, PoseInfo parent)
         ikInfo ??= DefaultIK;
         var calc = original.HasValue ? transform.CalculateDiff(original.Value) : transform;
 
-        if(calc.IsApproximatelySame(Transform.Identity))
-            return null;
+        //if(calc.IsApproximatelySame(Transform.Identity))
+        //    return null;
 
         var transformIndex = GetTransformIndex(prop, ikInfo.Value, forceNewStack);
         mirrorMode ??= MirrorMode;
@@ -95,8 +95,8 @@ public class BonePoseInfo(BonePoseInfoId id, PoseInfo parent)
 
         calc.Filter(applyTo);
 
-        if(Transform.Identity.IsApproximatelySame(calc + existing))
-            return null;
+        //if(Transform.Identity.IsApproximatelySame(calc + existing))
+        //    return null;
 
         if(mirrorMode == PoseMirrorMode.Copy)
         {
@@ -107,8 +107,11 @@ public class BonePoseInfo(BonePoseInfoId id, PoseInfo parent)
             var inverted = calc.Inverted();
             GetMirrorBone()?.Apply(inverted, null, prop, applyTo, ikInfo.Value, PoseMirrorMode.None, forceNewStack);
         }
-
-        var finaleTransform = _stacks[transformIndex].Transform + calc;
+        var referenceTransform = _stacks[transformIndex].Transform;
+        var finaleTransform = new Transform() { 
+            Position = referenceTransform.Position, 
+            Rotation = transform.Rotation, 
+            Scale = referenceTransform.Scale };
 
         if(finaleTransform.IsRotationNaN())
         {
