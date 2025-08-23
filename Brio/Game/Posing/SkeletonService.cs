@@ -72,8 +72,11 @@ public unsafe class SkeletonService : IDisposable
 
     public unsafe void RegisterForFrameUpdate(Skeleton? skeleton, SkeletonPosingCapability posingCapability)
     {
-        if(skeleton != null)
-            _skeletonToPosingCapability[skeleton] = posingCapability;
+        if(BrioAccessUtils.AffectsSkeletons)
+        {
+            if(skeleton != null)
+                _skeletonToPosingCapability[skeleton] = posingCapability;
+        }
     }
 
     public Skeleton? GetSkeleton(BrioCharacterBase* charaBase)
@@ -376,13 +379,16 @@ public unsafe class SkeletonService : IDisposable
 
     private void OnCharacterBaseMaterialsUpdate(BrioCharacterBase* charaBase)
     {
-        try
+        if(BrioAccessUtils.AffectsSkeletons)
         {
-            CacheSkeleton(charaBase);
-        }
-        catch(Exception e)
-        {
-            Brio.Log.Error(e, "Error during skeleton caching");
+            try
+            {
+                CacheSkeleton(charaBase);
+            }
+            catch(Exception e)
+            {
+                Brio.Log.Error(e, "Error during skeleton caching");
+            }
         }
     }
 
@@ -415,13 +421,16 @@ public unsafe class SkeletonService : IDisposable
     private void FinalizeSkeletonsHook(nint a1)
     {
         _finalizeSkeletonsHook.Original(a1);
-        try
+        if(BrioAccessUtils.AffectsSkeletons)
         {
-            FinalizeSkeletonUpdate();
-        }
-        catch(Exception e)
-        {
-            Brio.Log.Error(e, "Error during skeleton finalization");
+            try
+            {
+                FinalizeSkeletonUpdate();
+            }
+            catch(Exception e)
+            {
+                Brio.Log.Error(e, "Error during skeleton finalization");
+            }
         }
     }
 
