@@ -46,7 +46,6 @@ public unsafe class SkeletonService : IDisposable
 
     private const int PoseCount = 4;
 
-    public List<Skeleton> Skeletons => _skeletons;
 
     public SkeletonService(EntityManager entityManager, ObjectMonitorService monitorService, GPoseService gPoseService, IKService ikService, IFramework framework, ISigScanner scanner, IGameInteropProvider hooking)
     {
@@ -56,11 +55,14 @@ public unsafe class SkeletonService : IDisposable
         _ikService = ikService;
         _framework = framework;
 
+
         var updateBonePhysicsAddress = "48 89 5C 24 ?? 48 89 6C 24 ?? 48 89 74 24 ?? 57 41 54 41 56 48 83 EC ?? 48 8B 59 ?? 45 33 E4";
         _updateBonePhysicsHook = hooking.HookFromAddress<UpdateBonePhysicsDelegate>(scanner.ScanText(updateBonePhysicsAddress), UpdateBonePhysicsDetour);
         _updateBonePhysicsHook.Enable();
 
         var finalizeSkeletonsHook = "40 53 55 57 41 55 48 83 EC 68"; // JMP in Framework.TaskRenderGraphicsRender
+        _finalizeSkeletonsHook = hooking.HookFromAddress<FinalizeSkeletonsDelegate>(scanner.ScanText(finalizeSkeletonsHook), FinalizeSkeletonsHook);
+        _finalizeSkeletonsHook.Enable();
 
         _monitorService.CharacterBaseMaterialsUpdated += OnCharacterBaseMaterialsUpdate;
         _monitorService.CharacterBaseDestroyed += OnCharacterBaseCleanup;
@@ -203,6 +205,10 @@ public unsafe class SkeletonService : IDisposable
     {
         // This is a very hot path, be careful how much you do here.
         // All the main skeleton stuff like positions, IK and physics is done at this point.
+
+        if(!_gPoseService.IsGPosing)
+            return;
+
         _skeletonsToUpdate.Clear();
 
         BeginPosingInterval();
@@ -263,12 +269,10 @@ public unsafe class SkeletonService : IDisposable
 
         var boneId = bone.Index;
 
-        var trans = info.Transform;
-        trans.Filter(info.PropagateComponents);
+        var prop = info.PropagateComponents.HasFlag(TransformComponents.Position);
+        var modelSpace = pose->AccessBoneModelSpace(boneId, prop ? PropagateOrNot.Propagate : PropagateOrNot.DontPropagate);
 
         // Position
-        bool prop = info.PropagateComponents.HasFlag(TransformComponents.Position);
-        var modelSpace = pose->AccessBoneModelSpace(boneId, prop ? PropagateOrNot.Propagate : PropagateOrNot.DontPropagate);
         temp = modelSpace;
         temp.Position += info.Transform.Position;
         if(info.IKInfo.Enabled)
@@ -290,7 +294,7 @@ public unsafe class SkeletonService : IDisposable
         prop = info.PropagateComponents.HasFlag(TransformComponents.Rotation);
         modelSpace = pose->AccessBoneModelSpace(boneId, prop ? PropagateOrNot.Propagate : PropagateOrNot.DontPropagate);
         temp = modelSpace;
-        temp.Rotation = info.Transform.Rotation;
+        temp.Rotation *= info.Transform.Rotation;
         modelSpace->Rotation = *(hkQuaternionf*)(&temp.Rotation);
 
         // Scale
@@ -397,16 +401,13 @@ public unsafe class SkeletonService : IDisposable
     private nint UpdateBonePhysicsDetour(nint a1)
     {
         var result = _updateBonePhysicsHook.Original(a1);
-        if(BrioAccessUtils.AffectsSkeletons)
+        try
         {
-            try
-            {
-                BeginSkeletonUpdate();
-            }
-            catch(Exception e)
-            {
-                Brio.Log.Error(e, "Error during skeleton update");
-            }
+            BeginSkeletonUpdate();
+        }
+        catch(Exception e)
+        {
+            Brio.Log.Error(e, "Error during skeleton update");
         }
         return result;
     }
@@ -426,10 +427,9 @@ public unsafe class SkeletonService : IDisposable
 
     public void Dispose()
     {
+        _updateBonePhysicsHook.Dispose();
+        _finalizeSkeletonsHook.Dispose();
         _monitorService.CharacterBaseMaterialsUpdated -= OnCharacterBaseMaterialsUpdate;
         _monitorService.CharacterBaseDestroyed -= OnCharacterBaseCleanup;
-        _updateBonePhysicsHook?.Dispose();
-        _finalizeSkeletonsHook?.Dispose();
     }
 }
-
