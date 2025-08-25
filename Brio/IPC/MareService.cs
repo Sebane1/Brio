@@ -7,87 +7,87 @@ using System.Linq;
 
 namespace Brio.IPC;
 
-public class MareService : IDisposable
+public class McdfService : IDisposable
 {
-    public bool IsMareAvailable { get; private set; } = false;
+    public bool IsMcdfAvailable { get; private set; } = false;
 
 
     private readonly IDalamudPluginInterface _pluginInterface;
     private readonly ConfigurationService _configurationService;
 
-    private readonly ICallGateSubscriber<string, IGameObject, bool> _mareApplyMcdf;
+    private readonly ICallGateSubscriber<string, IGameObject, bool> _McdfApplyMcdf;
 
-    public MareService(IDalamudPluginInterface pluginInterface, ConfigurationService configurationService)
+    public McdfService(IDalamudPluginInterface pluginInterface, ConfigurationService configurationService)
     {
         _pluginInterface = pluginInterface;
         _configurationService = configurationService;
 
-        _mareApplyMcdf = pluginInterface.GetIpcSubscriber<string, IGameObject, bool>("McdfStandalone.LoadMcdf");
+        _McdfApplyMcdf = pluginInterface.GetIpcSubscriber<string, IGameObject, bool>("McdfStandalone.LoadMcdf");
 
-        RefreshMareStatus();
+        RefreshMcdfStatus();
 
-        _configurationService.OnConfigurationChanged += RefreshMareStatus;
+        _configurationService.OnConfigurationChanged += RefreshMcdfStatus;
     }
 
-    public void RefreshMareStatus()
+    public void RefreshMcdfStatus()
     {
-        if(_configurationService.Configuration.IPC.AllowMareIntegration)
+        if(_configurationService.Configuration.IPC.AllowMcdfIntegration)
         {
-            IsMareAvailable = ConnectToMare();
+            IsMcdfAvailable = ConnectToMcdf();
         }
         else
         {
-            IsMareAvailable = false;
+            IsMcdfAvailable = false;
         }
     }
 
     public bool LoadMcdfAsync(string fileName, IGameObject target)
     {
-        RefreshMareStatus();
+        RefreshMcdfStatus();
 
-        if(IsMareAvailable == false)
+        if(IsMcdfAvailable == false)
         {
-            Brio.Log.Error($"Failed load MCDF file, Mare is not available");
+            Brio.Log.Error($"Failed load MCDF file, Mcdf is not available");
             return false;
         }
 
         try
         {
-            // Todo: Need a way to tell Mare that they can still sync other players?
-            return _mareApplyMcdf.InvokeFunc(fileName, target);
+            // Todo: Need a way to tell Mcdf that they can still sync other players?
+            return _McdfApplyMcdf.InvokeFunc(fileName, target);
         }
         catch(Exception ex)
         {
-            Brio.Log.Error(ex, $"Failed to Invoke MareSynchronos.LoadMcdfAsync IPC");
+            Brio.Log.Error(ex, $"Failed to Invoke McdfSynchronos.LoadMcdfAsync IPC");
             return false;
         }
     }
 
-    private bool ConnectToMare()
+    private bool ConnectToMcdf()
     {
         try
         {
-            bool mareInstalled = _pluginInterface.InstalledPlugins.Any(x => x.Name == "A Quest Reborn" && x.IsLoaded == true);
+            bool McdfInstalled = _pluginInterface.InstalledPlugins.Any(x => x.Name == "A Quest Reborn" && x.IsLoaded == true);
 
-            if(!mareInstalled)
+            if(!McdfInstalled)
             {
-                Brio.Log.Debug("Mare Synchronos not present");
+                Brio.Log.Debug("Mcdf Synchronos not present");
                 return false;
             }
 
-            Brio.Log.Debug("Mare Synchronos integration initialized");
+            Brio.Log.Debug("Mcdf Synchronos integration initialized");
 
             return true;
         }
         catch(Exception ex)
         {
-            Brio.Log.Debug(ex, "Mare Synchronos initialize error");
+            Brio.Log.Debug(ex, "Mcdf Synchronos initialize error");
             return false;
         }
     }
 
     public void Dispose()
     {
-        _configurationService.OnConfigurationChanged -= RefreshMareStatus;
+        _configurationService.OnConfigurationChanged -= RefreshMcdfStatus;
     }
 }

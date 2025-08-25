@@ -1,4 +1,4 @@
-﻿using Brio.Capabilities.Actor;
+using Brio.Capabilities.Actor;
 using Brio.Entities;
 using Brio.Entities.Actor;
 using Brio.Library.Sources;
@@ -8,22 +8,22 @@ using Dalamud.Interface.Textures.TextureWraps;
 
 namespace Brio.Files;
 
-public class MareCharacterDataFileInfo : AppliableActorFileInfoBase<MareCharacterDataFile>
+public class McdfCharacterDataFileInfo : AppliableActorFileInfoBase<McdfCharacterDataFile>
 {
-    public MareCharacterDataFileInfo(EntityManager entityManager)
+    public McdfCharacterDataFileInfo(EntityManager entityManager)
     : base(entityManager)
     {
     }
 
-    public override string Name => "Mare Character Data";
+    public override string Name => "Mcdf Character Data";
     public override IDalamudTextureWrap Icon => ResourceProvider.Instance.GetResourceImage("Images.FileIcon_Mcdf.png");
     public override string Extension => ".mcdf";
 
-    // No support for actually loading an mcdf, as that's handled by IPC-ing to Mare.
+    // No support for actually loading an mcdf, as that's handled by IPC-ing to Mcdf.
     // But this class is used for the library tags, so lets just fake it with an empty file. =)
-    public override object? Load(string filePath) => new MareCharacterDataFile(filePath);
+    public override object? Load(string filePath) => new McdfCharacterDataFile(filePath);
 
-    protected override void Apply(MareCharacterDataFile file, ActorEntity actor, bool asExpression = false)
+    protected override void Apply(McdfCharacterDataFile file, ActorEntity actor, bool asExpression = false)
     {
         ActorAppearanceCapability? capability;
         if(actor.TryGetCapability<ActorAppearanceCapability>(out capability) && capability != null)
@@ -33,7 +33,7 @@ public class MareCharacterDataFileInfo : AppliableActorFileInfoBase<MareCharacte
     }
 }
 
-public class MareCharacterDataFile : IFileMetadata
+public class McdfCharacterDataFile : IFileMetadata
 {
     private string _filePath;
 
@@ -42,7 +42,7 @@ public class MareCharacterDataFile : IFileMetadata
     public string? Version => null;
     public TagCollection? Tags => null;
 
-    public MareCharacterDataFile(string filePath)
+    public McdfCharacterDataFile(string filePath)
     {
         _filePath = filePath;
     }
@@ -54,6 +54,6 @@ public class MareCharacterDataFile : IFileMetadata
 
     public void GetAutoTags(ref TagCollection tags)
     {
-        tags.Add("Mare Synchronos");
+        tags.Add("Mcdf Synchronos");
     }
 }

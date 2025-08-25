@@ -19,7 +19,7 @@ public class ActorAppearanceCapability : ActorCharacterCapability
     private readonly ActorAppearanceService _actorAppearanceService;
     private readonly PenumbraService _penumbraService;
     private readonly GlamourerService _glamourerService;
-    private readonly MareService _mareService;
+    private readonly McdfService _McdfService;
     private readonly GPoseService _gposeService;
 
     public string CurrentCollection => _penumbraService.GetCollectionForObject(Character);
@@ -43,14 +43,14 @@ public class ActorAppearanceCapability : ActorCharacterCapability
 
     public bool CanTint => _actorAppearanceService.CanTint;
 
-    public bool CanMcdf => _mareService.IsMareAvailable;
+    public bool CanMcdf => _McdfService.IsMcdfAvailable;
 
-    public ActorAppearanceCapability(ActorEntity parent, ActorAppearanceService actorAppearanceService, PenumbraService penumbraService, GlamourerService glamourerService, MareService mareService, GPoseService gPoseService) : base(parent)
+    public ActorAppearanceCapability(ActorEntity parent, ActorAppearanceService actorAppearanceService, PenumbraService penumbraService, GlamourerService glamourerService, McdfService McdfService, GPoseService gPoseService) : base(parent)
     {
         _actorAppearanceService = actorAppearanceService;
         _penumbraService = penumbraService;
         _glamourerService = glamourerService;
-        _mareService = mareService;
+        _McdfService = McdfService;
         _gposeService = gPoseService;
         Widget = new ActorAppearanceWidget(this);
 
@@ -60,7 +60,7 @@ public class ActorAppearanceCapability : ActorCharacterCapability
 
     public bool LoadMcdf(string path)
     {
-        return _mareService.LoadMcdfAsync(path, GameObject);
+        return _McdfService.LoadMcdfAsync(path, GameObject);
     }
 
     public void SetCollection(Guid collection)

@@ -1,4 +1,4 @@
-﻿using Brio.Config;
+using Brio.Config;
 using Brio.Game.Actor;
 using Brio.Game.GPose;
 using Dalamud.Game.ClientState.Objects.Types;
@@ -30,7 +30,7 @@ public class GlamourerService : IDisposable
     private readonly Glamourer.Api.IpcSubscribers.RevertState _glamourerRevertCharacter;
     private readonly Glamourer.Api.IpcSubscribers.GetState _glamourerGetState;
 
-    private readonly uint UnLockCode = 0x6D617265; // From MareSynchronos's IpcCallerGlamourer.cs
+    private readonly uint UnLockCode = 0x6D617265; // From McdfSynchronos's IpcCallerGlamourer.cs
 
     public GlamourerService(IDalamudPluginInterface pluginInterface, ConfigurationService configurationService, GPoseService gPoseService, IFramework framework, PenumbraService penumbraService,  ActorRedrawService redrawService)
     {

@@ -123,7 +123,7 @@ public class Brio
         // IPC
         serviceCollection.AddSingleton<PenumbraService>();
         serviceCollection.AddSingleton<GlamourerService>();
-        serviceCollection.AddSingleton<MareService>();
+        serviceCollection.AddSingleton<McdfService>();
 
         // Web
         serviceCollection.AddSingleton<WebService>();
@@ -159,7 +159,7 @@ public class Brio
         serviceCollection.AddSingleton<FileTypeInfoBase, AnamnesisCharaFileInfo>();
         serviceCollection.AddSingleton<FileTypeInfoBase, CMToolPoseFileInfo>();
         serviceCollection.AddSingleton<FileTypeInfoBase, PoseFileInfo>();
-        serviceCollection.AddSingleton<FileTypeInfoBase, MareCharacterDataFileInfo>();
+        serviceCollection.AddSingleton<FileTypeInfoBase, McdfCharacterDataFileInfo>();
         serviceCollection.AddSingleton<FileService>();
 
         serviceCollection.AddSingleton<SourceBase, GameDataNpcSource>();

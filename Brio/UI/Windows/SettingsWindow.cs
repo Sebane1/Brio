@@ -21,14 +21,14 @@ public class SettingsWindow : Window
     private readonly GlamourerService _glamourerService;
     private readonly WebService _webService;
     //private readonly BrioIPCService _brioIPCService;
-    private readonly MareService _mareService;
+    private readonly McdfService _McdfService;
 
     public SettingsWindow(
         ConfigurationService configurationService,
         PenumbraService penumbraService,
         GlamourerService glamourerService,
         WebService webService,
-        MareService mareService) : base($"{Brio.Name} Settings###brio_settings_window", ImGuiWindowFlags.NoResize)
+        McdfService McdfService) : base($"{Brio.Name} Settings###brio_settings_window", ImGuiWindowFlags.NoResize)
     {
         Namespace = "brio_settings_namespace";
 
@@ -36,7 +36,7 @@ public class SettingsWindow : Window
         _penumbraService = penumbraService;
         _glamourerService = glamourerService;
         _webService = webService;
-        _mareService = mareService;
+        _McdfService = McdfService;
 
         Size = new Vector2(400, 450);
     }
@@ -239,20 +239,20 @@ public class SettingsWindow : Window
                 }
             }
 
-            bool enableMare = _configurationService.Configuration.IPC.AllowMareIntegration;
-            if(ImGui.Checkbox("Allow Mare Synchronos Integration", ref enableMare))
+            bool enableMcdf = _configurationService.Configuration.IPC.AllowMcdfIntegration;
+            if(ImGui.Checkbox("Allow Mcdf Synchronos Integration", ref enableMcdf))
             {
-                _configurationService.Configuration.IPC.AllowMareIntegration = enableMare;
+                _configurationService.Configuration.IPC.AllowMcdfIntegration = enableMcdf;
                 _configurationService.ApplyChange();
             }
 
-            using(ImRaii.Disabled(!enableMare))
+            using(ImRaii.Disabled(!enableMcdf))
             {
-                ImGui.Text($"Mare Synchronos Status: {(_mareService.IsMareAvailable ? "Active" : "Inactive")}");
+                ImGui.Text($"Mcdf Synchronos Status: {(_McdfService.IsMcdfAvailable ? "Active" : "Inactive")}");
                 ImGui.SameLine();
-                if(ImBrio.FontIconButton("refresh_mare", FontAwesomeIcon.Sync, "Refresh Mare Synchronos Status"))
+                if(ImBrio.FontIconButton("refresh_Mcdf", FontAwesomeIcon.Sync, "Refresh Mcdf Synchronos Status"))
                 {
-                    _mareService.RefreshMareStatus();
+                    _McdfService.RefreshMcdfStatus();
                 }
             }
         }

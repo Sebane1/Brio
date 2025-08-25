@@ -136,7 +136,7 @@ public class LibraryWindow : Window
         _gPoseService.OnGPoseStateChange += OnGPoseStateChange;
 
         _favoritesFilter = new LibraryFavoritesFilter(configurationService);
-        _charactersFilter = new TypeFilter("Characters", typeof(AnamnesisCharaFile), typeof(ActorAppearanceUnion), typeof(MareCharacterDataFile));
+        _charactersFilter = new TypeFilter("Characters", typeof(AnamnesisCharaFile), typeof(ActorAppearanceUnion), typeof(McdfCharacterDataFile));
         _posesFilter = new TypeFilter("Poses", typeof(PoseFile), typeof(CMToolPoseFile));
         _selectedFilter = _favoritesFilter;
     }

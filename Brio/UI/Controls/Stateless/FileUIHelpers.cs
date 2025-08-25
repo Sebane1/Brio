@@ -122,7 +122,7 @@ public class FileUIHelpers
         List<Type> types = [typeof(ActorAppearanceUnion), typeof(AnamnesisCharaFile)];
 
         if(capability.CanMcdf)
-            types.Add(typeof(MareCharacterDataFile));
+            types.Add(typeof(McdfCharacterDataFile));
 
         TypeFilter filter = new TypeFilter("Characters", [.. types]);
 
@@ -138,9 +138,9 @@ public class FileUIHelpers
                 {
                     _ = capability.SetAppearance(appearanceFile, options);
                 }
-                else if(r is MareCharacterDataFile mareFile)
+                else if(r is McdfCharacterDataFile McdfFile)
                 {
-                    capability.LoadMcdf(mareFile.GetPath());
+                    capability.LoadMcdf(McdfFile.GetPath());
                 }
             });
 
@@ -157,9 +157,9 @@ public class FileUIHelpers
                 {
                     _ = capability.SetAppearance(appearanceFile, options);
                 }
-                else if(r is MareCharacterDataFile mareFile)
+                else if(r is McdfCharacterDataFile McdfFile)
                 {
-                    capability.LoadMcdf(mareFile.GetPath());
+                    capability.LoadMcdf(McdfFile.GetPath());
                 }
             });
         }
@@ -190,7 +190,7 @@ public class FileUIHelpers
 
     public static void ShowImportMCDFModal(ActorAppearanceCapability capability)
     {
-        UIManager.Instance.FileDialogManager.OpenFileDialog("Import MCDF File###import_character_window", "Mare Character Data File (*.mcdf){.mcdf}",
+        UIManager.Instance.FileDialogManager.OpenFileDialog("Import MCDF File###import_character_window", "Mcdf Character Data File (*.mcdf){.mcdf}",
                  (success, paths) =>
                  {
                      if(success && paths.Count == 1)

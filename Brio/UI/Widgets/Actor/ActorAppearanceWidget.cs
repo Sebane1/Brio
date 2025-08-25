@@ -43,7 +43,7 @@ public class ActorAppearanceWidget(ActorAppearanceCapability capability) : Widge
 
         if(Capability.CanMcdf)
         {
-            if(ImBrio.FontIconButton("load_mcdf", FontAwesomeIcon.CloudDownloadAlt, "Load Mare Synchronos MCDF"))
+            if(ImBrio.FontIconButton("load_mcdf", FontAwesomeIcon.CloudDownloadAlt, "Load Mcdf Synchronos MCDF"))
             {
                 FileUIHelpers.ShowImportMCDFModal(Capability);
             }

@@ -42,7 +42,7 @@ public class UIManager : IDisposable
 
     private readonly PenumbraService _penumbraService;
     private readonly GlamourerService _glamourerService;
-    private readonly MareService _mareService;
+    private readonly McdfService _McdfService;
 
     private readonly WindowSystem _windowSystem;
 
@@ -83,7 +83,7 @@ public class UIManager : IDisposable
 
             PenumbraService penumbraService,
             GlamourerService glamourerService,
-            MareService mareService
+            McdfService McdfService
         )
     {
         Instance = this;
@@ -112,7 +112,7 @@ public class UIManager : IDisposable
 
         _penumbraService = penumbraService;
         _glamourerService = glamourerService;
-        _mareService = mareService;
+        _McdfService = McdfService;
 
         _windowSystem = new(Brio.Name);
 
@@ -175,7 +175,7 @@ public class UIManager : IDisposable
 
         _penumbraService.RefreshPenumbraStatus();
         _glamourerService.RefreshGlamourerStatus();
-        _mareService.RefreshMareStatus();
+        _McdfService.RefreshMcdfStatus();
     }
 
     public void NotifyError(string message)
