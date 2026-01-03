@@ -1,11 +1,11 @@
-﻿
+
 //
 // Some code in this file was generated and is from the Lumina.Excel project (https://github.com/NotAdam/Lumina.Excel)
 // (Lumina.Excel.Sheets.ActionTimeline)
 //
 
-using Lumina.Excel.Sheets;
 using Lumina.Excel;
+using Lumina.Excel.Sheets;
 using Lumina.Text.ReadOnly;
 
 namespace Brio.Resources.Sheets;
@@ -36,6 +36,10 @@ readonly public struct BrioActionTimeline(ExcelPage page, uint offset, uint row)
     public readonly bool Unknown3 => page.ReadPackedBool(offset + 19, 4);
     public readonly bool IsLoop => page.ReadPackedBool(offset + 19, 5);
     public readonly bool Unknown4 => page.ReadPackedBool(offset + 19, 6);
+
+    public ExcelPage ExcelPage => throw new System.NotImplementedException();
+
+    public uint RowOffset => throw new System.NotImplementedException();
 
     static BrioActionTimeline IExcelRow<BrioActionTimeline>.Create(ExcelPage page, uint offset, uint row) =>
         new(page, offset, row);
