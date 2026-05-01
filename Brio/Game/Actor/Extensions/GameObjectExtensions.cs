@@ -12,8 +12,8 @@ public static class GameObjectExtensions
     {
         return go.ObjectKind switch
         {
-            ObjectKind.Player => FontAwesomeIcon.User,
-            ObjectKind.MountType => FontAwesomeIcon.Horse,
+            ObjectKind.Pc => FontAwesomeIcon.User,
+            ObjectKind.Mount => FontAwesomeIcon.Horse,
             ObjectKind.EventNpc => FontAwesomeIcon.Robot,
             ObjectKind.Companion => FontAwesomeIcon.Paw,
             ObjectKind.Ornament => FontAwesomeIcon.Umbrella,
@@ -34,7 +34,7 @@ public static class GameObjectExtensions
         {
             case ObjectKind.Ornament:
                 return $"Ornament ({go.ObjectIndex})";
-            case ObjectKind.MountType:
+            case ObjectKind.Mount:
                 return $"Mount ({go.ObjectIndex})";
             default:
                 return $"{go.Name} ({go.ObjectIndex})";
@@ -76,8 +76,6 @@ public static class GameObjectExtensions
     public unsafe static void SetName(this IGameObject gameObject, string name) => gameObject.Native()->SetName(name);
 
     public unsafe static void CalculateAndSetName(this ref StructsObject gameObject, int index) => gameObject.SetName(index.ToBrioName());
-
-    public unsafe static void CalculateAndSetName(this IGameObject gameObject, int index) => gameObject.Native()->CalculateAndSetName(index);
 
     public static unsafe T* GetDrawObject<T>(this IGameObject go) where T : unmanaged
     {

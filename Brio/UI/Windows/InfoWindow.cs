@@ -29,7 +29,7 @@ public class InfoWindow : Window
 
         using(var textGroup = ImRaii.Group())
         {
-            if(textGroup.Success)
+            if(textGroup.Alive)
             {
                 var text = $"""
                     Welcome to Brio, Version {_configurationService.Version}!
@@ -60,7 +60,7 @@ public class InfoWindow : Window
         }
 
         using var buttonGroup = ImRaii.Group();
-        if(buttonGroup.Success)
+        if(buttonGroup.Alive)
         {
             ImGui.PushStyleColor(ImGuiCol.Button, new Vector4(0, 100, 255, 255) / 255);
             if(ImGui.Button("Support Development", buttonSize))

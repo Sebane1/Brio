@@ -140,7 +140,7 @@ public abstract class Selector<T> where T : class
                                 {
                                     using(var itemGroup = ImRaii.Group())
                                     {
-                                        if(itemGroup.Success)
+                                        if(itemGroup.Alive)
                                             DrawItem(item, isSoftSelected);
                                     }
                                     if(ImGui.IsItemHovered())

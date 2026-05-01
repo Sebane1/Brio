@@ -226,7 +226,7 @@ public class UIManager : IDisposable
         {
             if(window.IsOpen == true)
             {
-                _hiddenWindows.Add(window);
+                _hiddenWindows.Add((Window)window);
                 window.IsOpen = false;
             }
         }

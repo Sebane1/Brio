@@ -1,4 +1,4 @@
-﻿using Brio.Config;
+using Brio.Config;
 using Brio.Game.GPose;
 using Dalamud.Game;
 using Dalamud.Hooking;
@@ -108,7 +108,7 @@ public class TimeService : IDisposable
         IsTimeFrozen = false;
     }
 
-    private void OnTerritoryChanged(ushort obj)
+    private void OnTerritoryChanged(uint obj)
     {
         IsTimeFrozen = false;
     }

@@ -1,4 +1,4 @@
-﻿
+
 using Brio.Config;
 using Brio.Game.GPose;
 using Brio.Game.Types;
@@ -78,7 +78,7 @@ public class WeatherService : IDisposable
 
     private readonly List<Weather> _territoryWeatherTable = [];
 
-    private ushort? _currentCachedTerritory;
+    private uint? _currentCachedTerritory;
 
     public IEnumerable<Weather> AllWeatherCollection => _gameDataProvider.Weathers.Values;
 
@@ -105,7 +105,7 @@ public class WeatherService : IDisposable
         _gPoseService.OnGPoseStateChange += OnGposeStateChanged;
     }
 
-    private void OnTerritoryChanged(ushort e)
+    private void OnTerritoryChanged(uint e)
     {
         UpdateWeathersForCurrentTerritory();
         WeatherOverrideEnabled = false;

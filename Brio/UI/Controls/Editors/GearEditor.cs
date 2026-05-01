@@ -139,7 +139,7 @@ public class GearEditor()
 
             using(var group = ImRaii.Group())
             {
-                if(group.Success)
+                if(group.Alive)
                 {
                     string description = $"{slot}: {model?.Name ?? "Unknown"}";
 
@@ -285,7 +285,7 @@ public class GearEditor()
 
             using(var group = ImRaii.Group())
             {
-                if(group.Success)
+                if(group.Alive)
                 {
                     string description = $"{slot}: {model?.Name ?? "Unknown"}";
 
@@ -438,7 +438,7 @@ public class GearEditor()
 
             using(var group = ImRaii.Group())
             {
-                if(group.Success)
+                if(group.Alive)
                 {
                     string description = $"Facewear: {facewearName}";
 

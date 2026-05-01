@@ -9,7 +9,7 @@
         "TestingAssemblyVersion": "0.4.3.1",
         "RepoUrl": "https://github.com/Etheirys/Brio",
         "ApplicableVersion": "any",
-        "DalamudApiLevel": 11,
+        "DalamudApiLevel": 15,
         "DownloadLinkInstall": "https://github.com/Etheirys/Brio/releases/download/v0.4.3.1/Brio.zip",
         "DownloadLinkTesting": "https://github.com/Etheirys/Brio/releases/download/v0.4.3.1/Brio.zip",
         "DownloadLinkUpdate": "https://github.com/Etheirys/Brio/releases/download/v0.4.3.1/Brio.zip",
