@@ -50,14 +50,14 @@ public class ActorSpawnService : IDisposable
         _clientState.TerritoryChanged += OnTerritoryChanged;
     }
 
-    public bool CreateCharacter([MaybeNullWhen(false)] out ICharacter outCharacter, SpawnFlags flags = SpawnFlags.Default, bool disableSpawnCompanion = false, Vector3 position = new Vector3(), float rotation = 0)
+    public bool CreateCharacter([MaybeNullWhen(false)] out ICharacter outCharacter, SpawnFlags flags = SpawnFlags.Default, bool disableSpawnCompanion = false, Vector3 position = new Vector3(), float rotation = 0, string? customName = null)
     {
         outCharacter = null;
 
         var localPlayer = _objectTable.LocalPlayer;
         if(localPlayer != null)
         {
-            if(CloneCharacter(localPlayer, out outCharacter, flags, disableSpawnCompanion: disableSpawnCompanion, position, rotation))
+            if(CloneCharacter(localPlayer, out outCharacter, flags, disableSpawnCompanion: disableSpawnCompanion, position, rotation, customName: customName))
             {
                 return true;
             }
@@ -66,7 +66,7 @@ public class ActorSpawnService : IDisposable
         return false;
     }
 
-    public unsafe bool CloneCharacter(ICharacter sourceCharacter, [MaybeNullWhen(false)] out ICharacter outCharacter, SpawnFlags flags = SpawnFlags.Default, bool disableSpawnCompanion = false, Vector3 position = new Vector3(), float rotation = 0)
+    public unsafe bool CloneCharacter(ICharacter sourceCharacter, [MaybeNullWhen(false)] out ICharacter outCharacter, SpawnFlags flags = SpawnFlags.Default, bool disableSpawnCompanion = false, Vector3 position = new Vector3(), float rotation = 0, string? customName = null)
     {
         outCharacter = null;
 
@@ -83,7 +83,7 @@ public class ActorSpawnService : IDisposable
             copyFlags |= CharacterCopyFlags.Position;
 
 
-        if(CreateEmptyCharacter(out outCharacter, flags))
+        if(CreateEmptyCharacter(out outCharacter, flags, customName))
         {
 
             var sourceNative = sourceCharacter.Native();
@@ -239,7 +239,7 @@ public class ActorSpawnService : IDisposable
         }
     }
 
-    private bool CreateEmptyCharacter([MaybeNullWhen(false)] out ICharacter outCharacter, SpawnFlags flags)
+    private bool CreateEmptyCharacter([MaybeNullWhen(false)] out ICharacter outCharacter, SpawnFlags flags, string? customName = null)
     {
         outCharacter = null;
 
@@ -273,9 +273,20 @@ public class ActorSpawnService : IDisposable
                     raw = "Reborn" + Regex.Replace(Guid.NewGuid().ToString(), @"[\d-]", string.Empty).Replace("-", "");
                     break;
             }
-            string name = raw.Substring(0, Math.Clamp(raw.Length, 0, 14));
-            int length = name.Length / 2;
-            ((FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject*)newObject)->SetName(count == 0 ? raw : FirstCharToUpper(name.Substring(0, length)) + " " + FirstCharToUpper(name.Substring(length))); // Brio One etc
+            // If a custom name was provided (e.g. for Custom NPCs), use it directly.
+            // Otherwise, use the randomized quest NPC name.
+            if(!string.IsNullOrEmpty(customName) && count > 0)
+            {
+                // Clamp to 20 chars (FFXIV name limit: "Firstname Lastname")
+                string cnpcName = customName.Length > 20 ? customName.Substring(0, 20) : customName;
+                ((FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject*)newObject)->SetName(cnpcName);
+            }
+            else
+            {
+                string name = raw.Substring(0, Math.Clamp(raw.Length, 0, 14));
+                int length = name.Length / 2;
+                ((FFXIVClientStructs.FFXIV.Client.Game.Object.GameObject*)newObject)->SetName(count == 0 ? raw : FirstCharToUpper(name.Substring(0, length)) + " " + FirstCharToUpper(name.Substring(length)));
+            }
 
             //_gPoseService.AddCharacterToGPose(newPlayer);
 
@@ -288,6 +299,7 @@ public class ActorSpawnService : IDisposable
 
         return true;
     }
+
     public static string FirstCharToUpper(string input)
     {
         if(String.IsNullOrEmpty(input))
