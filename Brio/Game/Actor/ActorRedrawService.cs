@@ -1,4 +1,4 @@
-﻿using Brio.Game.Actor.Extensions;
+using Brio.Game.Actor.Extensions;
 using Brio.Game.Core;
 using Dalamud.Game.ClientState.Objects.Types;
 using Dalamud.Plugin.Services;
@@ -7,18 +7,23 @@ using System.Threading.Tasks;
 
 namespace Brio.Game.Actor;
 
-public class ActorRedrawService(IFramework framework, IObjectTable objectTable)
+public class ActorRedrawService(IFramework framework, IObjectTable objectTable, IClientState clientState)
 {
     public delegate void ActorRedrawEventDelegate(IGameObject go, RedrawStage stage);
 
     public event ActorRedrawEventDelegate? ActorRedrawEvent;
+    
+    public static bool SuspendRedraws { get; set; } = false;
 
     private readonly IFramework _framework = framework;
 
     private readonly IObjectTable _objectTable = objectTable;
 
+    private readonly IClientState _clientState = clientState;
+
     public Task<RedrawResult> RedrawActor(int objectIndex)
     {
+        if(SuspendRedraws) return Task.FromResult(RedrawResult.Failed);
         var actor = _objectTable[objectIndex];
         if(actor == null)
             return Task.FromResult(RedrawResult.Failed);
@@ -28,6 +33,7 @@ public class ActorRedrawService(IFramework framework, IObjectTable objectTable)
 
     public async Task<RedrawResult> RedrawActor(IGameObject go)
     {
+        if(SuspendRedraws || !_clientState.IsLoggedIn) return RedrawResult.Failed;
         Brio.Log.Debug($"Beginning Brio redraw on gameobject {go.ObjectIndex}...");
         DisableDraw(go);
         try
@@ -48,20 +54,29 @@ public class ActorRedrawService(IFramework framework, IObjectTable objectTable)
 
     public unsafe void DisableDraw(IGameObject go)
     {
+        if(SuspendRedraws || !_clientState.IsLoggedIn) return;
+        if(go == null || !go.IsValid() || go.Address == 0) return;
         var native = go.Native();
-        native->DisableDraw();
+        if(native != null) native->DisableDraw();
     }
 
     public unsafe void EnableDraw(IGameObject go)
     {
+        if(SuspendRedraws || !_clientState.IsLoggedIn) return;
+        if(go == null || !go.IsValid() || go.Address == 0) return;
         var native = go.Native();
-        native->EnableDraw();
+        if(native != null) native->EnableDraw();
     }
 
     public unsafe Task DrawWhenReady(IGameObject go)
     {
         return _framework.RunUntilSatisfied(
-           () => go.Native()->IsReadyToDraw(),
+           () => 
+           {
+               if(SuspendRedraws || !_clientState.IsLoggedIn) return true;
+               if(go == null || !go.IsValid() || go.Address == 0) return true;
+               return go.Native()->IsReadyToDraw();
+           },
            (_) => EnableDraw(go),
            100,
            dontStartFor: 2
@@ -73,6 +88,8 @@ public class ActorRedrawService(IFramework framework, IObjectTable objectTable)
         return _framework.RunUntilSatisfied(
            () =>
            {
+               if(SuspendRedraws || !_clientState.IsLoggedIn) return true;
+               if(go == null || !go.IsValid() || go.Address == 0) return true;
                var drawObject = go.Native()->DrawObject;
                if(drawObject == null)
                    return false;

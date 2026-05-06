@@ -241,10 +241,12 @@ public class ActorAppearanceService : IDisposable
             }
         }
 
-       
         if(glamourerUnlocked)
         {
             await _glamourerService.UnlockAndRevertCharacter(character);
+
+            if(character == null || !character.IsValid() || character.Address == 0)
+                return RedrawResult.Optmized;
 
             needsRedraw = true;
         }
@@ -252,15 +254,25 @@ public class ActorAppearanceService : IDisposable
         RedrawResult redrawResult = RedrawResult.Optmized;
 
         if(needsRedraw)
+        {
             redrawResult = await _redrawService.RedrawActor(character);
+            if(character == null || !character.IsValid() || character.Address == 0)
+                return redrawResult;
+        }
 
         if(glamourerReset)
             await _glamourerService.RevertCharacter(character);
+
+        // Safety check: The character may have been destroyed during the async RevertCharacter wait
+        if(character == null || !character.IsValid() || character.Address == 0)
+            return redrawResult;
 
         unsafe
             {
 
             var native = character.Native();
+            if(native == null || native->GameObject.DrawObject == null)
+                return redrawResult;
 
             existingAppearance = GetActorAppearance(character);
 
